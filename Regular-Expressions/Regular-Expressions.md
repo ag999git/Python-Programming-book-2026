@@ -4,7 +4,8 @@
     - [Intermediate Level](#intermediate-level)
     - [Advance level](#advanced-level)
 - [Mini Project: Simulating a Regular Expression Matcher in Python](#mini-project-simulating-a-regular-expression-matcher-in-python)
-- []()
+    - [The Complete Python script which simulates a regex engine]()
+- [](#the-complete-python-script-which-simulates-a-regex-engine-is-as-follows-)
 
 
 
