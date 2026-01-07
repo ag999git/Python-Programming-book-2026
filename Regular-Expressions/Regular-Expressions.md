@@ -826,11 +826,6 @@ FINAL RESULT: NO MATCH
 
 ```
 
-
-
-
-
-
 ### Extension Task 2: Modify the Function Return Value
 
 **Task Description:-** Instead of returning only a boolean, update your function to return:
@@ -843,6 +838,118 @@ Where:
 
 #### Learning Point
 _Functions can return multiple values to expose internal computation._
+
+This extension is a fantastic way to practice data encapsulation. By returning a tuple of values, you allow the caller to not only see if the pattern matched, but also how the engine got there.
+
+The updated script is as follows. It has been refactored the logic to build a trace list and return the three requested values.
+
+```python
+
+def match_a_star_b_extended(text):
+    """
+    Returns (match_result, characters_consumed, trace)
+    - match_result: bool
+    - characters_consumed: int (final index)
+    - trace: list of strings showing step-by-step progress
+    """
+    index = 0
+    length = len(text)
+    trace = []
+    
+    # Helper to record the current state into the trace list
+    def add_to_trace(action):
+        matched = text[:index]
+        remaining = text[index:]
+        trace.append(f"{action:<15} | Matched: {repr(matched):<10} | Remaining: {repr(remaining)}")
+
+    add_to_trace("Start")
+
+    # 1. Consume all 'a's (Greedy)
+    while index < length and text[index] == 'a':
+        index += 1
+        add_to_trace("Consume 'a'")
+    
+    # 2. Check for 'b'
+    match_result = False
+    if index < length and text[index] == 'b':
+        index += 1
+        add_to_trace("Consume 'b'")
+        
+        # 3. Check for full match (end of string)
+        if index == length:
+            add_result = "Full Match"
+            match_result = True
+        else:
+            add_result = "Trailing Chars"
+    else:
+        add_result = "Failed/Missing b"
+
+    add_to_trace(add_result)
+    
+    return match_result, index, trace
+
+def run_extended_tests():
+    # Test cases to demonstrate various scenarios
+    test_inputs = ["aaaaab", "b", "aaac", "abx"]
+    
+    for text in test_inputs:
+        # Unpacking the multiple return values
+        success, consumed, history = match_a_star_b_extended(text)
+        
+        print(f"\nTESTING: {repr(text)}")
+        print(f"Result: {success} | Total Consumed: {consumed}")
+        print("Trace:")
+        for step in history:
+            print(f"  {step}")
+        print("-" * 60)
+
+run_tests_with_trace = run_extended_tests()
+```
+OUTPUT
+
+```python
+TESTING: 'aaaaab'
+Result: True | Total Consumed: 6
+Trace:
+  Start           | Matched: ''         | Remaining: 'aaaaab'
+  Consume 'a'     | Matched: 'a'        | Remaining: 'aaaab'
+  Consume 'a'     | Matched: 'aa'       | Remaining: 'aaab'
+  Consume 'a'     | Matched: 'aaa'      | Remaining: 'aab'
+  Consume 'a'     | Matched: 'aaaa'     | Remaining: 'ab'
+  Consume 'a'     | Matched: 'aaaaa'    | Remaining: 'b'
+  Consume 'b'     | Matched: 'aaaaab'   | Remaining: ''
+  Full Match      | Matched: 'aaaaab'   | Remaining: ''
+------------------------------------------------------------
+
+TESTING: 'b'
+Result: True | Total Consumed: 1
+Trace:
+  Start           | Matched: ''         | Remaining: 'b'
+  Consume 'b'     | Matched: 'b'        | Remaining: ''
+  Full Match      | Matched: 'b'        | Remaining: ''
+------------------------------------------------------------
+
+TESTING: 'aaac'
+Result: False | Total Consumed: 3
+Trace:
+  Start           | Matched: ''         | Remaining: 'aaac'
+  Consume 'a'     | Matched: 'a'        | Remaining: 'aac'
+  Consume 'a'     | Matched: 'aa'       | Remaining: 'ac'
+  Consume 'a'     | Matched: 'aaa'      | Remaining: 'c'
+  Failed/Missing b | Matched: 'aaa'      | Remaining: 'c'
+------------------------------------------------------------
+
+TESTING: 'abx'
+Result: False | Total Consumed: 2
+Trace:
+  Start           | Matched: ''         | Remaining: 'abx'
+  Consume 'a'     | Matched: 'a'        | Remaining: 'bx'
+  Consume 'b'     | Matched: 'ab'       | Remaining: 'x'
+  Trailing Chars  | Matched: 'ab'       | Remaining: 'x'
+------------------------------------------------------------
+
+```
+
 
 ### Extension Task 3: Display Consumption Details in Output
 
