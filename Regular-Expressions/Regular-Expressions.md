@@ -1,8 +1,8 @@
 ### Table of contents
 - [Python `re` Module – Questions & Answers](#python-re-module--questions--answers)
     - [Beginner level]()
-    - []()
-    - []()
+    - [Intermediate Level](#intermediate-level)
+    - [Advance level](advanced-level)
 - [Mini Project: Simulating a Regular Expression Matcher in Python](#mini-project-simulating-a-regular-expression-matcher-in-python)
 - []()
 
