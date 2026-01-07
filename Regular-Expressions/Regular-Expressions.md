@@ -657,6 +657,21 @@ def run_tests():
 # Call the test runner function
 run_tests()
 
+```
+
+OUTPUT
+
+```python
+Text       | Expected | Actual   | Result
+---------------------------------------------
+'b'        | True     | True     | PASS
+'ab'       | True     | True     | PASS
+'aaaaab'   | True     | True     | PASS
+'a'        | False    | False    | PASS
+'aaaba'    | False    | False    | PASS
+'abb'      | False    | False    | PASS
+'cab'      | False    | False    | PASS
+''         | False    | False    | PASS
 
 ```
 
