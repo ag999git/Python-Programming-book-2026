@@ -15,7 +15,7 @@
 This document contains **questions, answers, and learning points** for teaching Python’s `re` module. Questions are grouped by **difficulty level** and numbered within each category.
 
 ###  Beginner Level
-
+[Back to Table of Contents](#table-of-contents)
 #### **Q1. What are the similarities and differences between** `re.match()` **and** `re.search()`**?**
 
 **Answer:**
@@ -175,6 +175,7 @@ re.split(r"\d+", "abc123xyz456")
 -   More powerful than `str.split()`.
 
 ### 🟡 Intermediate Level
+[Back to Table of Contents](#table-of-contents)
 
 #### **Q10. What is the difference between greedy and non-greedy quantifiers?**
 
@@ -313,8 +314,8 @@ re.search(r"(?i)cat", "CAT")
 
 -   Flags modify matching behavior.
 
-### 🔵 Advanced Level
-
+### Advanced Level
+[Back to Table of Contents](#table-of-contents)
 #### **Q18. What is the difference between a Pattern object and a Match object?**
 
 **Answer:**
@@ -383,6 +384,7 @@ re.compile(r""" \d+     # digits \s*     # optional space """, re.VERBOSE)
 
 
 ## Mini Project: Simulating a Regular Expression Matcher in Python
+[Back to Table of Contents](#table-of-contents)
 
 **Project Title:- Implementing a Simple Regex Pattern Matcher (a*b) Without Using re**
 
@@ -422,23 +424,22 @@ Create a function named:
 
 This function should return:
 
--   True if the **entire string** matches the pattern `a*b`
--   False otherwise
+-   `True` if the **entire string** matches the pattern `a*b`
+-   `False` otherwise
 
 Variable Names to Use (Recommended)**
 
--   Use variable name `text` → `input string`
--   Use variable name `index` → `current position in the string`
--   Use variable name `length` → `total length of the string`
+-   Use variable name `text` → For `input string`
+-   Use variable name `index` → For `current position in the string`
+-   Use variable name `length` → For `total length of the string`
 
 **Logic Hints**
 
 -   Start reading the string from position `0`
 -   Use a `while` loop to **consume all `'a'` characters**
 -   After the loop:
-
--   Check whether the next character is `'b'`
--   Check whether this 'b' is the **last character**
+  -   Check whether the next character is `'b'`
+  -   Check whether this 'b' is the **last character**
 
 **Learning Point**
 
