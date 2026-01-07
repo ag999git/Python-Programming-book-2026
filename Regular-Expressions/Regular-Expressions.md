@@ -594,7 +594,8 @@ Your final script should contain:
 4.  A function call to `run_tests()`
 
 
-
+The following figure shows how the regex works
+![](https://github.com/ag999git/Python-Programming-book-2026/blob/main/book-extra/regex-project-flow-chart.png)
 
 
 #### The Complete Python script which simulates a regex engine is as follows:-
@@ -1388,7 +1389,12 @@ Final Result: False
 Consumed: 1 characters
 Failure Reason: Unexpected character 'x' (expected 'b')
 ========================================
-
 ```
+
+### Final Takeaway for Students
+“A regex engine does not simply succeed or fail — it tries, moves forward, and then decides.”
+
+
+
 
 
