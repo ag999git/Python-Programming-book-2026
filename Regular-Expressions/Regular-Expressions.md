@@ -387,7 +387,7 @@ re.compile(r""" \d+     # digits \s*     # optional space """, re.VERBOSE)
 
 
 
-## Mini Project: Simulating a Regular Expression Matcher in Python
+### Mini Project: Simulating a Regular Expression Matcher in Python
 [Back to Table of Contents](#table-of-contents)
 
 **Project Title:- Implementing a Simple Regex Pattern Matcher (a*b) Without Using re**
@@ -661,10 +661,7 @@ run_tests()
 ```
 
 
-
-
-
-#### Extension Assignment: Tracing Character Consumption in a Manual Regex Engine
+### Extension Assignment: Tracing Character Consumption in a Manual Regex Engine
 
 **Extension Title:- Visualizing How a Regex Engine Consumes Characters**
 
@@ -717,6 +714,122 @@ so that it also keeps track of:
 ##### Learning Point
 
 _Regex engines maintain internal state that records how far they have progressed._
+
+```python
+def match_a_star_b_visualized(text):
+    """
+    Matches a*b and prints the consumption of the string step-by-step.
+    """
+    index = 0
+    length = len(text)
+    
+    print(f"\nTracing pattern 'a*b' for input: {repr(text)}")
+    print(f"{'Step':<20} | {'Matched':<10} | {'Remaining'}")
+    print("-" * 50)
+
+    # 1. Consume all 'a's
+    while index < length and text[index] == 'a':
+        print(f"{'Consuming a':<20} | {text[:index+1]:<10} | {text[index+1:]}")
+        index += 1
+    
+    if index == 0 or (index > 0 and text[index-1] != 'a'):
+        if index < length and text[index] != 'b' and text[index] != 'a':
+            print(f"{'Unexpected char':<20} | {text[:index]:<10} | {text[index:]} <-- FAIL")
+
+    # 2. Check for 'b'
+    if index < length and text[index] == 'b':
+        print(f"{'Consuming b':<20} | {text[:index+1]:<10} | {text[index+1:]}")
+        index += 1
+        
+        # 3. Check if we are at the end
+        if index == length:
+            print(f"{'End of string':<20} | {text[:index]:<10} | (empty) <-- SUCCESS")
+            return True
+        else:
+            print(f"{'Trailing chars':<20} | {text[:index]:<10} | {text[index:]} <-- FAIL")
+    else:
+        if index == length:
+            print(f"{'Missing b':<20} | {text[:index]:<10} | (empty) <-- FAIL")
+        else:
+            print(f"{'Expected b':<20} | {text[:index]:<10} | {text[index:]} <-- FAIL")
+            
+    return False
+
+def run_visual_tests():
+    # Focused test cases to show different failure/success steps
+    test_cases = ["aaaaab", "ab", "b", "aaac", "aaaba"]
+    
+    for text in test_cases:
+        result = match_a_star_b_visualized(text)
+        print(f"FINAL RESULT: {'MATCH' if result else 'NO MATCH'}")
+        print("=" * 50)
+
+run_visual_tests()
+
+```
+
+Output
+
+```python
+Tracing pattern 'a*b' for input: 'aaaaab'
+Step                 | Matched    | Remaining
+--------------------------------------------------
+Consuming a          | a          | aaaab
+Consuming a          | aa         | aaab
+Consuming a          | aaa        | aab
+Consuming a          | aaaa       | ab
+Consuming a          | aaaaa      | b
+Consuming b          | aaaaab     |
+End of string        | aaaaab     | (empty) <-- SUCCESS
+FINAL RESULT: MATCH
+==================================================
+
+Tracing pattern 'a*b' for input: 'ab'
+Step                 | Matched    | Remaining
+--------------------------------------------------
+Consuming a          | a          | b
+Consuming b          | ab         |
+End of string        | ab         | (empty) <-- SUCCESS
+FINAL RESULT: MATCH
+==================================================
+
+Tracing pattern 'a*b' for input: 'b'
+Step                 | Matched    | Remaining
+--------------------------------------------------
+Consuming b          | b          |
+End of string        | b          | (empty) <-- SUCCESS
+FINAL RESULT: MATCH
+==================================================
+
+Tracing pattern 'a*b' for input: 'aaac'
+Step                 | Matched    | Remaining
+--------------------------------------------------
+Consuming a          | a          | aac
+Consuming a          | aa         | ac
+Consuming a          | aaa        | c
+Expected b           | aaa        | c <-- FAIL
+FINAL RESULT: NO MATCH
+==================================================
+
+Tracing pattern 'a*b' for input: 'aaaba'
+Step                 | Matched    | Remaining
+--------------------------------------------------
+Consuming a          | a          | aaba
+Consuming a          | aa         | aba
+Consuming a          | aaa        | ba
+Consuming b          | aaab       | a
+Trailing chars       | aaab       | a <-- FAIL
+FINAL RESULT: NO MATCH
+==================================================
+
+
+
+```
+
+
+
+
+
 
 ### Extension Task 2: Modify the Function Return Value
 
