@@ -593,7 +593,7 @@ Your final script should contain:
 
 
 #### The Complete Python script which simulates a regex engine is as follows:-
-
+[Back to Table of Contents](#table-of-contents)
 ```python
 
 def match_a_star_b(text):
