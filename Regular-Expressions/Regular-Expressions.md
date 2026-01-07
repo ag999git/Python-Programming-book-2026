@@ -664,6 +664,141 @@ run_tests()
 
 
 
+#### Extension Assignment: Tracing Character Consumption in a Manual Regex Engine
+
+**Extension Title:- Visualizing How a Regex Engine Consumes Characters**
+
+##### Purpose of the Extension
+
+In the previous assignment, you implemented a manual matcher for the pattern: `a*b`
+
+You verified whether a given string fully matches the pattern.
+
+In this extension, you will **enhance your matcher** so that it also **tracks and displays how the input string is consumed step by step**, just like a real regex engine.
+
+##### Why This Matters
+
+Real regex engines:
+
+-   Do not just return _match / no match_
+-   They **move through the string character by character**
+-   They may consume characters **even when the match eventually fails**
+
+This task helps you understand:
+-   Why partial matches occur
+-   Why some regexes fail after “making progress”
+-   How debugging regex patterns becomes possible
+
+### Extension Task 1: Track Consumed Characters
+
+-   **Task Description**
+
+Modify your existing function:
+
+`match_a_star_b(text)`
+
+so that it also keeps track of:
+
+1.  **Which characters were consumed**
+2.  **At which positions they were consumed**
+3.  **Total number of characters consumed**
+
+##### Implementation Hints
+
+-   Introduce a variable named `trace`
+    -  This should be a **`list`**
+    -  Each time a character is consumed, append a message such as:
+    -  Consumed `a` at position `0`
+
+-   Continue to use:
+    -  `index` to track position
+    -  `length` to track string length
+
+##### Learning Point
+
+_Regex engines maintain internal state that records how far they have progressed._
+
+### Extension Task 2: Modify the Function Return Value
+
+**Task Description:-** Instead of returning only a boolean, update your function to return:
+
+`(match_result, characters_consumed, trace)`
+Where:
+-   `match_result` → `True` or `False`
+-  ` characters_consumed` → final value of `index`
+-   `trace` → list showing character-by-character consumption
+
+#### Learning Point
+_Functions can return multiple values to expose internal computation._
+
+### Extension Task 3: Display Consumption Details in Output
+
+**Task Description:-** Update your test runner so that, for each input string, it prints:
+
+-   Match result
+-   Number of characters consumed
+-   A step-by-step trace of consumed characters
+
+##### Sample Output Format (Guideline)
+
+Input text: `'a'`
+Consumed 'a' at position `0`
+Result: `False`
+Characters consumed: 1
+
+##### Learning Point
+
+_Visualization makes invisible execution steps easier to understand._
+
+### Extension Task 4: Interpret Partial Consumption
+
+**Conceptual Question (Mandatory):-** Answer the following in comments or a separate text file:
+
+Why does the input "a" consume one character but still result in a failed match for the pattern a*b?
+
+##### Learning Point
+
+_Progress during matching does not guarantee success._
+
+##### Dos and  Don’ts (Extension-Specific)
+
+##### DO
+-   Reuse your existing logic
+-   Append tracing without rewriting the entire function
+-   Keep trace output readable
+-   Use lists instead of global variables
+
+##### DON’T
+
+-   Do not use the `re` module
+-   Do not hardcode trace output
+-   Do not change the pattern definition
+-   Do not suppress partial consumption
+
+##### Hints
+Think like a regex engine:
+1.  Consume all valid 'a' characters
+2.  Attempt to consume 'b'
+3.  Decide success **only at the end**
+4.  Report how far you reached
+
+##### Completion Checklist
+
+Your extension is complete when:
+
+ - Characters consumed are displayed   The total consumed count is shown.
+ - Partial consumption is visible for failed matches.
+ - Existing test    cases still work
+
+#### Optional Challenge (Hard)
+
+-   Add a failure reason (missing `'b'`, extra characters)
+-   Highlight the current index using a pointer (`^`)
+-   Store trace entries as `(index, character)` tuples
+-   Add a toggle to enable/disable tracing
+
+
+
 
 
 
