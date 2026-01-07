@@ -616,23 +616,23 @@ The following figure shows how the regex works
 
 1.Start (Oval)
 What it represents:
-The beginning of the matching process.
+-  The beginning of the matching process.
 What happens here:
-The function is called
-No characters have been processed yet
+-  The function is called
+-  No characters have been processed yet
 Learning point:
-Every algorithm has a clear starting point.
+-  Every algorithm has a clear starting point.
 
 2.Initialization (Rectangle)
-index = 0
-length = len(text)
+`index = 0`
+`length = len(text)`
 What it represents:
-Setting up variables before matching begins.
+-  Setting up variables before matching begins.
 Why this is needed:
-•	index keeps track of how many characters have been consumed
-•	length represents total input size
+-  index keeps track of how many characters have been consumed
+-  ength represents total input size
 Learning point:
-Regex engines track position in the input string.
+-  Regex engines track position in the input string.
 
 3.Check for 'a' (Diamond)
 text[index] == 'a' ?
