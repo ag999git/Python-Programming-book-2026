@@ -379,6 +379,220 @@ re.compile(r""" \d+     # digits \s*     # optional space """, re.VERBOSE)
 
 **Learning Points:**
 
+
+
+
+## XXX
+
+
+
+### Mini Project: Simulating a Regular Expression Matcher in Python
+
+**Project Title:- Implementing a Simple Regex Pattern Matcher (a*b) Without Using re**
+
+#### 1. Project Objective
+
+In this task, you will **simulate the working of a regular expression engine** for a very simple pattern using **basic Python logic**, without using the `re` module.
+
+You will write a Python program that checks whether a given string **fully matches** the pattern: `a*b`
+
+**What does `a*b` mean?**
+It means you can have:-
+      - Zero or more `'a'` characters
+      - Followed by **exactly one** `'b'`
+      - No extra characters before or after
+
+#### 2. Learning Outcomes
+
+By completing this task, you will learn:
+
+-   How regex patterns work **internally**
+-   How to use loops and indexes to parse strings
+-   How to design **clean, testable functions**
+-   How to structure programs using **function calls instead of __main__**
+-   How to write and run **automated test cases**
+
+#### 3. Step-by-Step Task Description
+
+##### Step 1: Write the Pattern Matching Function
+
+**Task**
+
+Create a function named:
+
+`match_a_star_b(text)`
+
+**Purpose**
+
+This function should return:
+
+-   True if the **entire string** matches the pattern `a*b`
+-   False otherwise
+
+-   **Variable Names to Use (Recommended)**
+
+-   Use variable name `text` → `input string`
+-   Use variable name `index` → `current position in the string`
+-   Use variable name `length` → `total length of the string`
+
+**Logic Hints**
+
+-   Start reading the string from position `0`
+-   Use a `while` loop to **consume all `'a'` characters**
+-   After the loop:
+
+-   Check whether the next character is `'b'`
+-   Check whether this 'b' is the **last character**
+
+**Learning Point**
+
+_Regex engines move character by character and track position using indexes._
+
+----------
+
+#### Step 2: Ensure Full String Matching
+
+**Task**
+
+Make sure your function does **not** accept partial matches.
+
+Examples:
+
+-   `"ab"` →  valid
+-   `"abb"` →  invalid
+-   `"aaaba"` →  invalid
+-   **Hint**
+
+After matching `'b'`, your index should be equal to length.
+
+**Learning Point**
+
+_Regular expressions often use full matches, not partial ones._
+
+#### Step 3: Create Test Cases as a Sequence
+
+**Task**
+
+Create a function named:
+
+`get_test_cases()`
+
+This function should return a **list of tuples**.
+
+Each tuple should contain:
+
+`(input_string, expected_result)`
+
+**Suggested Test Cases**
+
+-   `"b"` → True
+-  ` "ab"` → True
+-  ` "aaaaab"` → True
+-   `"a"` → False
+-   `"abb"` → False
+-   `"cab"` → False
+-   `""` → False
+
+**Learning Point**
+
+_Grouping test cases helps automate testing and avoids repetitive code._
+
+#### Step 4: Execute Tests Using a Loop
+
+**Task**
+
+Write a function named:
+
+**`run_tests()`**
+
+This function should:
+
+1.  Retrieve test cases
+2.  Loop through them one by one
+3.  Call **`match_a_star_b()`** for each case
+4.  Print:
+
+-   Input
+-   Expected result
+-   Actual result
+-   PASS / FAIL status
+
+**Suggested Variable names**
+
+-   `test_cases`
+-   `text`
+-   `expected`
+-   `actual`
+-   `result`
+
+**Learning Point**
+
+_Automated testing is a key skill in professional programming._
+
+#### Step 5: Call the Test Runner
+
+Instead of using:
+
+**`if __name__ == "__main__":`**
+
+Simply call:
+
+**`run_tests()`**
+
+**Learning Point**
+
+_Functions allow controlled execution and reuse in notebooks, scripts, and larger projects._
+
+----------
+
+#### Dos and Don’ts
+
+**DOs**
+
+-   Use meaningful variable names (`index, length`)
+-   Use functions to separate logic and testing
+-   Use loops instead of hard-coded checks
+-   Comment your code clearly
+-   Ensure the **entire string** matches the pattern
+
+**DON’Ts**
+
+-   Do **not** use the re module
+-   Do **not** use `startswith()` or string slicing tricks
+-   Do **not** hardcode answers for test cases
+-   Do **not** write all code in the global scope
+-   Do **not** accept partial matches
+
+### Logic Breakdown (Hint Section for Students)
+
+Think like a regex engine:
+
+1.  Start at position 0
+2.  While you see 'a', move forward
+3.  Expect exactly one 'b'
+4.  Ensure there are **no characters left**
+5.  Return True or False accordingly
+
+### Expected Structure of Final Script
+
+Your final script should contain:
+
+1.  `match_a_star_b(text)`
+2.  `get_test_cases()`
+3.  `run_tests()`
+4.  A function call to `run_tests()`
+
+
+
+
+
+
+
+
+
+
+
+
 -   Performance and clean design.
 
 
