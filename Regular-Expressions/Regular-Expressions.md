@@ -685,10 +685,10 @@ You should submit:
 
 </details>
 
-### XXX
+### Write a regexp which places certain restrictions on a password that a user may select
 <details>
 
-<summary>   XXX    </summary>
+<summary>   Script which asks user to select a password with certain restrictions    </summary>
 
 #### Problem:- Write a regexp which places the following restrictions on a password that a user may select:-
 
