@@ -8,7 +8,7 @@
     - [Beginner level]()
     - [Intermediate Level](#intermediate-level)
     - [Advance level](#advanced-level)
-- [Using regular expression (re) to check for primality]()
+- [Using regular expression (re) to check for primality](#mini-project-simulating-a-regular-expression-matcher-in-python)
 - [Mini Project: Simulating a Regular Expression Matcher in Python](#mini-project-simulating-a-regular-expression-matcher-in-python)
     - [The Complete Python script which simulates a regex engine](#the-complete-python-script-which-simulates-a-regex-engine-is-as-follows-)
 - [Extension Assignment: Tracing Character Consumption in a Manual Regex Engine](#extension-assignment-tracing-character-consumption-in-a-manual-regex-engine)
