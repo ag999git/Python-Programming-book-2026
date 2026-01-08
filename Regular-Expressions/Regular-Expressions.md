@@ -7,7 +7,7 @@
     - [The Complete Python script which simulates a regex engine](#the-complete-python-script-which-simulates-a-regex-engine-is-as-follows-)
 - [Extension Assignment: Tracing Character Consumption in a Manual Regex Engine](#extension-assignment-tracing-character-consumption-in-a-manual-regex-engine)
     - [Extension Task 1: Track Consumed Characters](#extension-task-1-track-consumed-characters)
-        - [Line-by-Line Explanation of Extension Tasl 2 Script](#line-by-line-explanation)
+        - [Line-by-Line Explanation of Extension Task 2 Script](#line-by-line-explanation)
     - [Extension Task 2: Modify the Function Return Value](#extension-task-2-modify-the-function-return-value)
     - [Extension Task 3: Display Consumption Details in Output](#extension-task-3-display-consumption-details-in-output)
     - [Extension Task 4: Interpret Partial Consumption](#extension-task-4-interpret-partial-consumption)
