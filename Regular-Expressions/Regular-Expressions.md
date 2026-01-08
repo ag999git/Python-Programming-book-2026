@@ -398,6 +398,7 @@ re.compile(r""" \d+     # digits \s*     # optional space """, re.VERBOSE)
 
 ### Using regular expression (re) to check for primality
 [Back to Table of Contents](#table-of-contents)
+
 This section contains detailed explanation to the problem given in the book.
 
 The script implementing given in the book is
@@ -415,7 +416,7 @@ print('is prime 9->', is_prime(9))  # False
 print('is prime 11->', is_prime(11))  # True
 ```
 However the above script given in the book does not explain the working in details.
-Given below is an improved version of the script with helpful comments
+Given below is an improved version of the script with helpful comments (In collapsable Headers)
 
 <details>
 <summary> Assignment: Detecting Prime Numbers Using Regular Expressions Detailed script </summary>
