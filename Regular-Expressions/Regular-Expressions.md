@@ -1274,11 +1274,6 @@ Learning point:
 
 </details>
 
-
-
-#### The Complete Python script which simulates a regex engine is as follows:-
-[Back to Table of Contents](#table-of-contents)
-
 <details>
 
 <summary> The Complete Python script which simulates a regex engine is as follows:-  </summary>
