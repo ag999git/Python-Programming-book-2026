@@ -5,7 +5,7 @@
 
 ### Table of contents
 - [Python `re` Module – Questions & Answers](#python-re-module--questions--answers)
-    - [Beginner level]()
+    - [Beginner level](#beginner-level)
     - [Intermediate Level](#intermediate-level)
     - [Advance level](#advanced-level)
 - [Mini Project: Using regular expression (re) to check for primality](#mini-project-simulating-a-regular-expression-matcher-in-python)
