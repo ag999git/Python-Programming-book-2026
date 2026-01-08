@@ -519,6 +519,10 @@ print("is_prime_unary(9) ->", is_prime_unary(9))   # False (composite)
 
 #### Assignment: Detecting Prime Numbers Using Regular Expressions
 
+<details>
+
+<summary> Assignment: Detecting Prime Numbers Using Regular Expressions (details) </summary>
+
 ##### Objective
 
 Use **regular expressions (regex)** to determine whether a given number is **prime**, **without using any arithmetic operations** such as division (`/`, `%`) or loops that test factors.
