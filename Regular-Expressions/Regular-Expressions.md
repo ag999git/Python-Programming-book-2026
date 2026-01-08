@@ -3071,6 +3071,11 @@ This extension beautifully teaches:
 
 #### Optional Challenge (Hard)
 [Back to Table of Contents](#table-of-contents)
+
+<details>
+
+<summary> Optional Challenge (Hard) </summary>
+
 -   Add a failure reason (missing `'b'`, extra characters)
 -   Highlight the current index using a pointer (`^`)
 -   Store trace entries as `(index, character)` tuples
@@ -3285,6 +3290,9 @@ Failure Reason: Unexpected character 'x' (expected 'b')
 ==================================================
 
 ```
+
+</details>
+
 <details>
 
 <summary> Line by Line explanation of the Optional Challenge    </summary>
