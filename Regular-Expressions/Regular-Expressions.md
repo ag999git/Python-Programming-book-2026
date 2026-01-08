@@ -1908,7 +1908,7 @@ Characters consumed: 0
 ```
 
 <details>
-<summary>    XXX  </summary>
+<summary> Line-by-Line Explanation of above script Task 3  </summary>
 
 #### Line-by-Line Explanation of above script
 
