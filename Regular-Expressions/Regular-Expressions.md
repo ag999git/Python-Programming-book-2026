@@ -1515,7 +1515,239 @@ Trace:
 ------------------------------------------------------------
 
 ```
+<details>
+<summary>        Line by Line explanation of Extension Task 2     </summary>
 
+
+####  **Line-by-Line Explanation**
+
+----------
+
+#####  Function Definition
+
+`def  match_a_star_b_extended(text):` 
+
+Defines a function that:
+
+-   Simulates regex matching for `a*b`
+    
+-   Returns **more than just `True/False`**
+    
+-   Exposes **internal computation**
+    
+
+This mirrors **real regex engines in debug mode**.
+
+----------
+
+##### Core Variables
+
+```python
+index = 0 length = len(text)
+trace = []
+``` 
+
+-   `index` → current cursor position in the string
+    
+-   `length` → total string length
+    
+-   `trace` → records _how_ the engine processes input
+    
+
+Regex engines always track **position + history**.
+
+----------
+
+##### Helper Function: `add_to_trace`
+
+`def  add_to_trace(action):` 
+
+This helper:
+
+-   Captures the **engine’s current state**
+    
+-   Prevents repetitive code
+    
+-   Makes tracing readable
+    
+
+
+```python
+matched = text[:index]
+remaining = text[index:]
+``` 
+
+-   `matched` → already consumed characters
+    
+-   `remaining` → characters not yet examined
+    
+
+This split is fundamental in parsing engines.
+
+----------
+
+`trace.append(...)` 
+
+Stores a **formatted snapshot** of engine state:
+
+-   Action taken
+    
+-   What matched
+    
+-   What remains
+    
+
+----------
+
+#####  Initial Trace Entry
+
+`add_to_trace("Start")` 
+
+Logs the **starting state**:
+
+-   Nothing consumed
+    
+-   Entire string remaining
+    
+This is similar to a regex engine’s initial state.
+
+----------
+
+#### Step 1: Matching `a*`
+
+`while index < length and text[index] == 'a':` 
+
+Meaning:
+
+-   Stay inside the string
+    
+-   Keep consuming `'a'`
+    
+
+This implements:
+
+`a*` 
+
+----------
+
+```python
+index += 1 
+add_to_trace("Consume 'a'")
+``` 
+
+Each `'a'`:
+
+-   Advances the cursor
+    
+-   Is logged into the trace
+    
+This shows **greedy matching** in action.
+
+----------
+
+##### Step 2: Matching `'b'`
+
+`if index < length and text[index] == 'b':` 
+
+After consuming all `'a'`s:
+
+-   There must be **exactly one `'b'`
+    
+
+If missing → failure.
+
+----------
+
+```python
+index += 1 
+add_to_trace("Consume 'b'")
+``` 
+
+Consumes and records the `'b'`.
+
+----------
+
+##### Step 3: Full Match Check
+
+`if index == length:` 
+
+Ensures:
+
+-   No characters remain
+    
+-   Full match (`^a*b$`)
+    
+
+----------
+
+##### Possible Outcomes
+
+| Situation        | Recorded Result    |
+| ---------------- | ------------------ |
+| Full match       | "Full Match"       |
+| Extra characters | "Trailing Chars"   |
+| Missing 'b'      | "Failed/Missing b" |
+
+----------
+
+##### Final Trace Entry
+
+`add_to_trace(add_result)` 
+
+Records **why the match succeeded or failed**.
+
+This is exactly how debuggers explain failures.
+
+----------
+
+##### Returning Multiple Values
+
+`return match_result, index, trace` 
+
+The function returns:
+
+1.  Whether the match succeeded
+    
+2.  How many characters were consumed
+    
+3.  How the engine progressed
+    
+This is **data encapsulation**, not just computation.
+
+----------
+
+##### Test Runner
+
+```python
+success, consumed, history = match_a_star_b_extended(text)
+``` 
+
+This demonstrates:
+
+-   Python’s ability to return **multiple values**
+    
+-   Clean separation between **engine logic** and **presentation**
+    
+
+----------
+
+#### Key Learning Point (Perfectly Achieved)
+
+> **Returning internal state makes functions transparent, debuggable, and testable.**
+
+This modification of script shows:
+
+-   How regex engines work
+    
+-   How parsers track progress
+    
+-   How software exposes internals safely
+    
+
+This is **advanced thinking explained simply**.
+
+    
+</details>
 
 ### Extension Task 3: Display Consumption Details in Output
 [Back to Table of Contents](#table-of-contents)
