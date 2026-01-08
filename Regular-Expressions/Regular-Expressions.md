@@ -38,6 +38,8 @@ This document contains **questions, answers, and learning points** for teaching 
 
 <summary> Beginner Level Q/A </summary>
 
+</details>
+
 #### **Q1. What are the similarities and differences between** `re.match()` **and** `re.search()`**?**
 
 **Answer:**
