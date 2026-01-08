@@ -942,7 +942,6 @@ print("pascal to upper-> ", pascal_to_upper("PascalCaseExample"))  # pascal to u
 ### Mini Project: Simulating a Regular Expression Matcher in Python
 [Back to Table of Contents](#table-of-contents)
 
-**Project Title:- Implementing a Simple Regex Pattern Matcher (a*b) Without Using re**
 
 <details>
 
