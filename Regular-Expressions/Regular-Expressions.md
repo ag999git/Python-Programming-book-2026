@@ -2502,76 +2502,129 @@ This extension beautifully teaches:
 
 This challenge moves your script from a simple matcher to a professional-grade Regex Debugger. By using a pointer (^) and specific failure reasons, you make the engine's "internal thoughts" visible to the user.
 
-The "Hard Mode" Regex Simulator
+The "Hard Mode" Regex Simulator.
+
 Here is the implementation using tuple-based tracing and a toggle switch.
 
 ```python
-def match_a_star_b_pro(text, tracing_enabled=True):
+def match_a_star_b_pro_v5(text, tracing_enabled=True):
     """
-    Returns (match_result, characters_consumed, trace, failure_reason)
-    Trace stores tuples: (current_index, character_at_index)
+    VERSION 5 – Regex Debugger Simulation (Pro Mode)
+
+    Pattern: a*b
+    Meaning:
+      - a* : zero or more 'a'
+      - b  : exactly one 'b'
+      - Entire string must match
+
+    Returns a tuple:
+    (match_result, characters_consumed, trace, failure_reason)
+
+    Where:
+    - match_result: True if full pattern matches, else False
+    - characters_consumed: final cursor position
+    - trace: list of tuples (index, character) recording consumption
+    - failure_reason: textual explanation for failure
     """
+    # Cursor for scanning input
     index = 0
+
+    # Total length of the input string
     length = len(text)
+
+    # Trace list: stores tuples (current_index, character)
     trace = []
+
+    # Default failure reason (None = no failure)
     failure_reason = "None"
-    
-    # Helper to capture state
+
+    # --------------------------------------------------
+    # Helper: Record the current state if tracing is enabled
+    # --------------------------------------------------
     def record_step():
         if tracing_enabled and index < length:
             trace.append((index, text[index]))
 
-    # 1. Consume all 'a's
+    # --------------------------------------------------
+    # STEP 1: Consume all 'a's
+    # --------------------------------------------------
     while index < length and text[index] == 'a':
-        record_step()
-        index += 1
-    
-    # 2. Check for 'b'
-    match_result = False
+        record_step()  # Record each 'a' consumed
+        index += 1     # Move cursor forward
+
+    # --------------------------------------------------
+    # STEP 2: Check for 'b'
+    # --------------------------------------------------
+    match_result = False  # Assume failure
+
     if index < length and text[index] == 'b':
-        record_step()
+        record_step()  # Record the 'b' consumption
         index += 1
-        
-        # 3. Check for end of string
+
+        # --------------------------------------------------
+        # STEP 3: Ensure no extra characters
+        # --------------------------------------------------
         if index == length:
-            match_result = True
+            match_result = True  # Successful full match
         else:
             failure_reason = "Extra characters after pattern"
     else:
+        # Handle missing or unexpected character
         if index == length:
             failure_reason = "Missing 'b'"
         else:
             failure_reason = f"Unexpected character '{text[index]}' (expected 'b')"
-            
+
+    # Return all internal computation details
     return match_result, index, trace, failure_reason
 
-def display_pointer(text, index):
-    """Generates a visual pointer for a specific index."""
+
+def display_pointer_v5(text, index):
+    """
+    Generates a visual pointer (^) to indicate current position in the string.
+    Example:
+        text: "aaaab"
+        index: 4
+        output:
+        aaaab
+            ^
+    """
     return f"{text}\n{' ' * index}^"
 
-def run_pro_tests():
+
+def run_pro_tests_v5():
+    """
+    Test runner for Pro Version:
+    - Shows full trace with pointers
+    - Reports success/failure
+    - Displays failure reason
+    """
     test_cases = ["aaaaab", "a", "aaaba", "b", "axb"]
-    
+
     for text in test_cases:
-        # Toggle set to True for the challenge
-        success, consumed, trace, reason = match_a_star_b_pro(text, tracing_enabled=True)
-        
+        # Call the matcher with tracing enabled
+        success, consumed, trace, reason = match_a_star_b_pro_v5(text, tracing_enabled=True)
+
         print(f"\nInput: {repr(text)}")
-        print("-" * 30)
-        
-        # Display the trace with pointers
+        print("-" * 40)
+
+        # Display step-by-step trace
         if trace:
             for idx, char in trace:
-                print(f"Step: Consuming '{char}'")
-                print(display_pointer(text, idx))
-        
+                print(f"Step: Consuming '{char}' at position {idx}")
+                print(display_pointer_v5(text, idx))
+
+        # Summary of result
         print(f"\nFinal Result: {success}")
-        print(f"Consumed: {consumed} characters")
+        print(f"Characters Consumed: {consumed}")
         if not success:
             print(f"Failure Reason: {reason}")
-        print("=" * 40)
+        print("=" * 50)
 
-run_pro_tests()
+
+# Execute the Pro Version test runner
+run_pro_tests_v5()
+
 
 ```
 
@@ -2579,81 +2632,82 @@ OUTPUT
 
 ```python
 Input: 'aaaaab'
-------------------------------
-Step: Consuming 'a'
+----------------------------------------
+Step: Consuming 'a' at position 0
 aaaaab
 ^
-Step: Consuming 'a'
+Step: Consuming 'a' at position 1
 aaaaab
  ^
-Step: Consuming 'a'
+Step: Consuming 'a' at position 2
 aaaaab
   ^
-Step: Consuming 'a'
+Step: Consuming 'a' at position 3
 aaaaab
    ^
-Step: Consuming 'a'
+Step: Consuming 'a' at position 4
 aaaaab
     ^
-Step: Consuming 'b'
+Step: Consuming 'b' at position 5
 aaaaab
      ^
 
 Final Result: True
-Consumed: 6 characters
-========================================
+Characters Consumed: 6
+==================================================
 
 Input: 'a'
-------------------------------
-Step: Consuming 'a'
+----------------------------------------
+Step: Consuming 'a' at position 0
 a
 ^
 
 Final Result: False
-Consumed: 1 characters
+Characters Consumed: 1
 Failure Reason: Missing 'b'
-========================================
+==================================================
 
 Input: 'aaaba'
-------------------------------
-Step: Consuming 'a'
+----------------------------------------
+Step: Consuming 'a' at position 0
 aaaba
 ^
-Step: Consuming 'a'
+Step: Consuming 'a' at position 1
 aaaba
  ^
-Step: Consuming 'a'
+Step: Consuming 'a' at position 2
 aaaba
   ^
-Step: Consuming 'b'
+Step: Consuming 'b' at position 3
 aaaba
    ^
 
 Final Result: False
-Consumed: 4 characters
+Characters Consumed: 4
 Failure Reason: Extra characters after pattern
-========================================
+==================================================
 
 Input: 'b'
-------------------------------
-Step: Consuming 'b'
+----------------------------------------
+Step: Consuming 'b' at position 0
 b
 ^
 
 Final Result: True
-Consumed: 1 characters
-========================================
+Characters Consumed: 1
+==================================================
 
 Input: 'axb'
-------------------------------
-Step: Consuming 'a'
+----------------------------------------
+Step: Consuming 'a' at position 0
 axb
 ^
 
 Final Result: False
-Consumed: 1 characters
+Characters Consumed: 1
 Failure Reason: Unexpected character 'x' (expected 'b')
-========================================
+==================================================
+
 ```
 
 ### Final Takeaway for Students
