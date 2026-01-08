@@ -202,6 +202,10 @@ re.split(r"\d+", "abc123xyz456")
 ### Intermediate Level
 [Back to Table of Contents](#table-of-contents)
 
+<details>
+
+<summary> Intermediate Level Q/A </summary>
+
 #### **Q10. What is the difference between greedy and non-greedy quantifiers?**
 
 **Answer:**
@@ -338,6 +342,8 @@ re.search(r"(?i)cat", "CAT")
 **Learning Points:**
 
 -   Flags modify matching behavior.
+
+</details>
 
 ### Advanced Level
 [Back to Table of Contents](#table-of-contents)
