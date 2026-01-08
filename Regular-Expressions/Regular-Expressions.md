@@ -519,7 +519,7 @@ that returns:
 -   `False` otherwise
     
 
-### 🚫 Restrictions
+##### Restrictions
 
 You **must not**:
 
@@ -562,7 +562,7 @@ This representation is called **unary**.
 
 ----------
 
-##### 🔹 Hint 2: Think in terms of repetition
+##### Hint 2: Think in terms of repetition
 
 A **composite number** can be written as:
 
