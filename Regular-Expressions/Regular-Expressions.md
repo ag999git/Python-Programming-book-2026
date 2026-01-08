@@ -34,7 +34,7 @@ This document contains **questions, answers, and learning points** for teaching 
 ###  Beginner Level
 [Back to Table of Contents](#table-of-contents)
 
-<details></details>
+<details>
 
 <summary> Beginner Level Q/A </summary>
 
