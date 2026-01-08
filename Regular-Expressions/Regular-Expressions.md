@@ -1,3 +1,5 @@
+![Python 3.12+ Badge](https://img.shields.io/badge/Python-3.12%2B-blue)
+
 ### Table of contents
 - [Python `re` Module – Questions & Answers](#python-re-module--questions--answers)
     - [Beginner level]()
