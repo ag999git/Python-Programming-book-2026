@@ -347,6 +347,11 @@ re.search(r"(?i)cat", "CAT")
 
 ### Advanced Level
 [Back to Table of Contents](#table-of-contents)
+
+<details>
+
+<summary> Advanced Level Q/A </summary>
+
 #### **Q18. What is the difference between a Pattern object and a Match object?**
 
 **Answer:**
@@ -501,6 +506,8 @@ print("is_prime_unary(9) ->", is_prime_unary(9))   # False (composite)
 
 <details>
 <summary> Detailed explanation of script for detecting Prime Numbers Using Regular Expressions </summary>
+
+</details>
 
 #### Assignment: Detecting Prime Numbers Using Regular Expressions
 
