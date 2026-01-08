@@ -484,7 +484,7 @@ print("is_prime_unary(9) ->", is_prime_unary(9))   # False (composite)
 </details>
 
 <details>
-<summary> Detecting Prime Numbers Using Regular Expressions </summary>
+<summary> Detailed explanation of script for detecting Prime Numbers Using Regular Expressions </summary>
 
 #### Assignment: Detecting Prime Numbers Using Regular Expressions
 
