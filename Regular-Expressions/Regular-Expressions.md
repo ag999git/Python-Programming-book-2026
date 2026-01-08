@@ -2157,65 +2157,111 @@ Answer: > The pattern a*b is a sequence of two requirements. The first requireme
 The Updated Script: Extension Task 4
 
 ```python
-def match_a_star_b_engine(text):
+def match_a_star_b_engine_v4(text):
     """
-    Simulates a*b and returns (match_result, characters_consumed, trace)
-    Pattern: zero or more 'a' followed by exactly one 'b'.
+    VERSION 4 – Regex Engine Simulation with Partial Consumption
+
+    Simulates the regex pattern: a*b
+
+    Pattern meaning:
+    - a* : zero or more 'a' characters
+    - b  : exactly one 'b'
+    - The entire string must be consumed for a successful match
+
+    Returns a tuple:
+    (match_result, characters_consumed, trace)
+
+    Where:
+    - match_result        -> True if the FULL pattern matches
+    - characters_consumed -> How many characters the engine consumed
+    - trace               -> Step-by-step record of consumption
     """
+
+    # Cursor that tracks how far the engine has moved
     index = 0
+
+    # Total length of the input string
     length = len(text)
+
+    # Trace list to record character-by-character progress
     trace = []
-    
-    # Requirement 1: Consume all 'a' characters
-    # We record progress here even if the match later fails.
+
+    # --------------------------------------------------
+    # REQUIREMENT 1: Consume all 'a' characters (a*)
+    # --------------------------------------------------
+    # NOTE:
+    # Even if the match fails later, we still record
+    # all progress made here. This is IMPORTANT.
     while index < length and text[index] == 'a':
         trace.append(f"Consumed 'a' at position {index}")
-        index += 1
-    
-    # Requirement 2: Check for 'b'
-    match_result = False
+        index += 1  # Move the engine forward
+
+    # --------------------------------------------------
+    # REQUIREMENT 2: Expect exactly one 'b'
+    # --------------------------------------------------
+    match_result = False  # Assume failure unless proven otherwise
+
     if index < length and text[index] == 'b':
         trace.append(f"Consumed 'b' at position {index}")
         index += 1
-        
-        # Requirement 3: Entire string must be exhausted
+
+        # --------------------------------------------------
+        # REQUIREMENT 3: Entire string must be exhausted
+        # --------------------------------------------------
         if index == length:
             match_result = True
-            
+
+    # IMPORTANT CONCEPT:
+    # The function returns progress information EVEN IF the match fails.
+    # This highlights the difference between "progress" and "completion".
     return match_result, index, trace
+
 
 def run_test_runner_v4():
     """
-    Runner that focuses on showing partial consumption in failures.
+    VERSION 4 – Test runner focused on:
+    - Showing partial consumption
+    - Highlighting failed matches that still made progress
     """
     test_cases = [
-        "aaaaab", # Full Match
-        "a",      # Partial match (only a's)
-        "b",      # Full Match (zero a's)
-        "aaac",   # Partial match (a's matched, 'c' stops engine)
-        "aaaba"   # Partial match (pattern found, but trailing 'a' fails it)
+        "aaaaab",  # Full match
+        "a",       # Partial consumption, but FAIL
+        "b",       # Full match (zero 'a's)
+        "aaac",    # Partial consumption, stopped by invalid char
+        "aaaba"    # Partial consumption, trailing characters
     ]
-    
+
     print(f"{'INPUT':<10} | {'RESULT':<7} | {'CONSUMED':<10} | {'TRACE'}")
     print("-" * 70)
-    
+
     for text in test_cases:
-        success, count, history = match_a_star_b_engine(text)
-        
-        # Format the trace into a single line for the table
-        trace_display = " -> ".join([step.split()[-1] for step in history]) if history else "None"
-        
+        success, count, history = match_a_star_b_engine_v4(text)
+
+        # Condensed trace for table display
+        trace_display = (
+            " -> ".join(step.split()[-1] for step in history)
+            if history else "None"
+        )
+
         print(f"{repr(text):<10} | {str(success):<7} | {count:<10} | {trace_display}")
-        
-        # Detailed output for the "a" case to fulfill task requirements
+
+        # --------------------------------------------------
+        # Focused explanation for the key conceptual case: "a"
+        # --------------------------------------------------
         if text == "a":
-            print(f"\n[Focus on 'a']:")
+            print(f"\n[FOCUS CASE: Input = 'a']")
             for step in history:
                 print(f"  - {step}")
-            print(f"  - Result: {success} (Failed because 'b' was never found)")
-            print(f"  - Total Count: {count}\n" + "-"*70)
+            print("  - Observation: Progress was made, but the pattern was incomplete.")
+            print("  - Reason: The engine expected 'b', but the string ended.")
+            print(f"  - Final Result: {success}")
+            print(f"  - Characters Consumed: {count}")
+            print("-" * 70)
 
+
+# Execute the version 4 test runner
 run_test_runner_v4()
+
 
 ```
 OUTPUT
@@ -2226,16 +2272,23 @@ INPUT      | RESULT  | CONSUMED   | TRACE
 'aaaaab'   | True    | 6          | 0 -> 1 -> 2 -> 3 -> 4 -> 5
 'a'        | False   | 1          | 0
 
-[Focus on 'a']:
+[FOCUS CASE: Input = 'a']
   - Consumed 'a' at position 0
-  - Result: False (Failed because 'b' was never found)
-  - Total Count: 1
+  - Observation: Progress was made, but the pattern was incomplete.
+  - Reason: The engine expected 'b', but the string ended.
+  - Final Result: False
+  - Characters Consumed: 1
 ----------------------------------------------------------------------
 'b'        | True    | 1          | 0
 'aaac'     | False   | 3          | 0 -> 1 -> 2
 'aaaba'    | False   | 4          | 0 -> 1 -> 2 -> 3
 
 ```
+
+<details>
+<summary> ZZZ  </summary>
+
+</details>
 
 #### Optional Challenge (Hard)
 [Back to Table of Contents](#table-of-contents)
