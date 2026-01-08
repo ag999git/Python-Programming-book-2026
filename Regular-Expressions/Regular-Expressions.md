@@ -519,7 +519,7 @@ print("is_prime_unary(9) ->", is_prime_unary(9))   # False (composite)
 
 </details>
 
-#### Assignment: Detecting Prime Numbers Using Regular Expressions
+##### Assignment: Detecting Prime Numbers Using Regular Expressions
 
 <details>
 
