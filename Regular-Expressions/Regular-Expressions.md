@@ -979,111 +979,208 @@ _Regex engines maintain internal state that records how far they have progressed
 ```python
 def match_a_star_b_visualized(text):
     """
-    Matches a*b and prints the consumption of the string step-by-step.
+    Matches the regex pattern a*b and visually traces how characters
+    are consumed step-by-step.
+
+    Pattern meaning:
+    a*  -> zero or more 'a'
+    b   -> exactly one 'b'
     """
+
+    # Cursor that moves through the string (like a regex engine pointer)
     index = 0
+
+    # Total length of the input string
     length = len(text)
-    
+
+    # TRACE keeps a history of what was consumed and where
+    trace = []
+
     print(f"\nTracing pattern 'a*b' for input: {repr(text)}")
-    print(f"{'Step':<20} | {'Matched':<10} | {'Remaining'}")
-    print("-" * 50)
+    print(f"{'Step':<25} | {'Consumed':<12} | {'Remaining'}")
+    print("-" * 55)
 
-    # 1. Consume all 'a's
+    # ---------------------------------------
+    # STEP 1: Match 'a*'
+    # ---------------------------------------
+    # Consume all consecutive 'a' characters
     while index < length and text[index] == 'a':
-        print(f"{'Consuming a':<20} | {text[:index+1]:<10} | {text[index+1:]}")
-        index += 1
-    
-    if index == 0 or (index > 0 and text[index-1] != 'a'):
-        if index < length and text[index] != 'b' and text[index] != 'a':
-            print(f"{'Unexpected char':<20} | {text[:index]:<10} | {text[index:]} <-- FAIL")
+        trace.append(f"Consumed 'a' at position {index}")
 
-    # 2. Check for 'b'
+        print(
+            f"{'Consuming a':<25} | "
+            f"{text[:index+1]:<12} | "
+            f"{text[index+1:]}"
+        )
+
+        index += 1  # Move cursor forward
+
+    # ---------------------------------------
+    # STEP 2: Match 'b'
+    # ---------------------------------------
     if index < length and text[index] == 'b':
-        print(f"{'Consuming b':<20} | {text[:index+1]:<10} | {text[index+1:]}")
+        trace.append(f"Consumed 'b' at position {index}")
+
+        print(
+            f"{'Consuming b':<25} | "
+            f"{text[:index+1]:<12} | "
+            f"{text[index+1:]}"
+        )
+
         index += 1
-        
-        # 3. Check if we are at the end
+
+        # ---------------------------------------
+        # STEP 3: Full string consumed?
+        # ---------------------------------------
         if index == length:
-            print(f"{'End of string':<20} | {text[:index]:<10} | (empty) <-- SUCCESS")
+            print(
+                f"{'End of string':<25} | "
+                f"{text:<12} | (empty) <-- SUCCESS"
+            )
+
+            print("\nTRACE LOG:")
+            for entry in trace:
+                print(" -", entry)
+
+            print(f"Total characters consumed: {len(trace)}")
             return True
+
         else:
-            print(f"{'Trailing chars':<20} | {text[:index]:<10} | {text[index:]} <-- FAIL")
+            print(
+                f"{'Trailing characters':<25} | "
+                f"{text[:index]:<12} | {text[index:]} <-- FAIL"
+            )
+
     else:
+        # Failed to find required 'b'
         if index == length:
-            print(f"{'Missing b':<20} | {text[:index]:<10} | (empty) <-- FAIL")
+            print(
+                f"{'Missing b':<25} | "
+                f"{text:<12} | (empty) <-- FAIL"
+            )
         else:
-            print(f"{'Expected b':<20} | {text[:index]:<10} | {text[index:]} <-- FAIL")
-            
+            print(
+                f"{'Expected b':<25} | "
+                f"{text[:index]:<12} | {text[index:]} <-- FAIL"
+            )
+
+    # ---------------------------------------
+    # FAILURE PATH
+    # ---------------------------------------
+    print("\nTRACE LOG:")
+    for entry in trace:
+        print(" -", entry)
+
+    print(f"Total characters consumed: {len(trace)}")
     return False
 
+
 def run_visual_tests():
-    # Focused test cases to show different failure/success steps
+    """
+    Runs a small set of inputs to demonstrate
+    success and failure paths visually.
+    """
     test_cases = ["aaaaab", "ab", "b", "aaac", "aaaba"]
-    
+
     for text in test_cases:
         result = match_a_star_b_visualized(text)
-        print(f"FINAL RESULT: {'MATCH' if result else 'NO MATCH'}")
-        print("=" * 50)
+        print(f"\nFINAL RESULT: {'MATCH' if result else 'NO MATCH'}")
+        print("=" * 55)
 
+
+# Trigger the visual test runner
 run_visual_tests()
+
 
 ```
 
-Output
-
 ```python
 Tracing pattern 'a*b' for input: 'aaaaab'
-Step                 | Matched    | Remaining
---------------------------------------------------
-Consuming a          | a          | aaaab
-Consuming a          | aa         | aaab
-Consuming a          | aaa        | aab
-Consuming a          | aaaa       | ab
-Consuming a          | aaaaa      | b
-Consuming b          | aaaaab     |
-End of string        | aaaaab     | (empty) <-- SUCCESS
+Step                      | Consumed     | Remaining
+-------------------------------------------------------
+Consuming a               | a            | aaaab
+Consuming a               | aa           | aaab
+Consuming a               | aaa          | aab
+Consuming a               | aaaa         | ab
+Consuming a               | aaaaa        | b
+Consuming b               | aaaaab       |
+End of string             | aaaaab       | (empty) <-- SUCCESS
+
+TRACE LOG:
+ - Consumed 'a' at position 0
+ - Consumed 'a' at position 1
+ - Consumed 'a' at position 2
+ - Consumed 'a' at position 3
+ - Consumed 'a' at position 4
+ - Consumed 'b' at position 5
+Total characters consumed: 6
+
 FINAL RESULT: MATCH
-==================================================
+=======================================================
 
 Tracing pattern 'a*b' for input: 'ab'
-Step                 | Matched    | Remaining
---------------------------------------------------
-Consuming a          | a          | b
-Consuming b          | ab         |
-End of string        | ab         | (empty) <-- SUCCESS
+Step                      | Consumed     | Remaining
+-------------------------------------------------------
+Consuming a               | a            | b
+Consuming b               | ab           |
+End of string             | ab           | (empty) <-- SUCCESS
+
+TRACE LOG:
+ - Consumed 'a' at position 0
+ - Consumed 'b' at position 1
+Total characters consumed: 2
+
 FINAL RESULT: MATCH
-==================================================
+=======================================================
 
 Tracing pattern 'a*b' for input: 'b'
-Step                 | Matched    | Remaining
---------------------------------------------------
-Consuming b          | b          |
-End of string        | b          | (empty) <-- SUCCESS
+Step                      | Consumed     | Remaining
+-------------------------------------------------------
+Consuming b               | b            |
+End of string             | b            | (empty) <-- SUCCESS
+
+TRACE LOG:
+ - Consumed 'b' at position 0
+Total characters consumed: 1
+
 FINAL RESULT: MATCH
-==================================================
+=======================================================
 
 Tracing pattern 'a*b' for input: 'aaac'
-Step                 | Matched    | Remaining
---------------------------------------------------
-Consuming a          | a          | aac
-Consuming a          | aa         | ac
-Consuming a          | aaa        | c
-Expected b           | aaa        | c <-- FAIL
+Step                      | Consumed     | Remaining
+-------------------------------------------------------
+Consuming a               | a            | aac
+Consuming a               | aa           | ac
+Consuming a               | aaa          | c
+Expected b                | aaa          | c <-- FAIL
+
+TRACE LOG:
+ - Consumed 'a' at position 0
+ - Consumed 'a' at position 1
+ - Consumed 'a' at position 2
+Total characters consumed: 3
+
 FINAL RESULT: NO MATCH
-==================================================
+=======================================================
 
 Tracing pattern 'a*b' for input: 'aaaba'
-Step                 | Matched    | Remaining
---------------------------------------------------
-Consuming a          | a          | aaba
-Consuming a          | aa         | aba
-Consuming a          | aaa        | ba
-Consuming b          | aaab       | a
-Trailing chars       | aaab       | a <-- FAIL
+Step                      | Consumed     | Remaining
+-------------------------------------------------------
+Consuming a               | a            | aaba
+Consuming a               | aa           | aba
+Consuming a               | aaa          | ba
+Consuming b               | aaab         | a
+Trailing characters       | aaab         | a <-- FAIL
+
+TRACE LOG:
+ - Consumed 'a' at position 0
+ - Consumed 'a' at position 1
+ - Consumed 'a' at position 2
+ - Consumed 'b' at position 3
+Total characters consumed: 4
+
 FINAL RESULT: NO MATCH
-==================================================
-
-
+=======================================================
 
 ```
 
