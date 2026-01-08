@@ -1368,55 +1368,95 @@ The updated script is as follows. It has been refactored the logic to build a tr
 
 def match_a_star_b_extended(text):
     """
-    Returns (match_result, characters_consumed, trace)
-    - match_result: bool
-    - characters_consumed: int (final index)
-    - trace: list of strings showing step-by-step progress
-    """
-    index = 0
-    length = len(text)
-    trace = []
-    
-    # Helper to record the current state into the trace list
-    def add_to_trace(action):
-        matched = text[:index]
-        remaining = text[index:]
-        trace.append(f"{action:<15} | Matched: {repr(matched):<10} | Remaining: {repr(remaining)}")
+    Simulates matching the regex pattern a*b.
 
+    Returns a tuple:
+    (match_result, characters_consumed, trace)
+
+    Where:
+    - match_result        -> True if the entire string matches a*b, else False
+    - characters_consumed -> How many characters were consumed (final index)
+    - trace               -> Step-by-step trace of the matching process
+    """
+
+    # Cursor that moves through the string (like a regex engine pointer)
+    index = 0
+
+    # Total number of characters in the input string
+    length = len(text)
+
+    # Trace list to record internal matching steps
+    trace = []
+
+    # --------------------------------------------------
+    # Helper function to record the current engine state
+    # --------------------------------------------------
+    def add_to_trace(action):
+        """
+        Records:
+        - The action being taken
+        - The part of the string already matched
+        - The remaining unmatched part
+        """
+        matched = text[:index]      # Characters already consumed
+        remaining = text[index:]    # Characters yet to be examined
+
+        trace.append(
+            f"{action:<15} | "
+            f"Matched: {repr(matched):<10} | "
+            f"Remaining: {repr(remaining)}"
+        )
+
+    # Initial state before any matching begins
     add_to_trace("Start")
 
-    # 1. Consume all 'a's (Greedy)
+    # --------------------------------------------------
+    # STEP 1: Match 'a*' (zero or more 'a', greedy)
+    # --------------------------------------------------
     while index < length and text[index] == 'a':
-        index += 1
-        add_to_trace("Consume 'a'")
-    
-    # 2. Check for 'b'
-    match_result = False
+        index += 1                  # Consume the 'a'
+        add_to_trace("Consume 'a'") # Record the consumption
+
+    # --------------------------------------------------
+    # STEP 2: Match 'b'
+    # --------------------------------------------------
+    match_result = False            # Assume failure unless proven otherwise
+
     if index < length and text[index] == 'b':
-        index += 1
+        index += 1                  # Consume the 'b'
         add_to_trace("Consume 'b'")
-        
-        # 3. Check for full match (end of string)
+
+        # --------------------------------------------------
+        # STEP 3: Ensure full string is consumed
+        # --------------------------------------------------
         if index == length:
             add_result = "Full Match"
-            match_result = True
+            match_result = True     # Entire string matched successfully
         else:
-            add_result = "Trailing Chars"
+            add_result = "Trailing Chars"  # Extra characters remain
     else:
-        add_result = "Failed/Missing b"
+        add_result = "Failed/Missing b"    # Required 'b' not found
 
+    # Record final outcome state
     add_to_trace(add_result)
-    
+
+    # Return internal engine results as a tuple
     return match_result, index, trace
 
+
 def run_extended_tests():
-    # Test cases to demonstrate various scenarios
+    """
+    Runs multiple test cases and displays:
+    - Match result
+    - Characters consumed
+    - Detailed trace output
+    """
     test_inputs = ["aaaaab", "b", "aaac", "abx"]
-    
+
     for text in test_inputs:
-        # Unpacking the multiple return values
+        # Unpacking multiple return values from the function
         success, consumed, history = match_a_star_b_extended(text)
-        
+
         print(f"\nTESTING: {repr(text)}")
         print(f"Result: {success} | Total Consumed: {consumed}")
         print("Trace:")
@@ -1424,11 +1464,16 @@ def run_extended_tests():
             print(f"  {step}")
         print("-" * 60)
 
-run_tests_with_trace = run_extended_tests()
+
+# Execute the test runner
+run_extended_tests()
+
+
 ```
 OUTPUT
 
 ```python
+
 TESTING: 'aaaaab'
 Result: True | Total Consumed: 6
 Trace:
