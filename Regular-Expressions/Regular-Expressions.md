@@ -1912,6 +1912,10 @@ Your `trace` list **models that internal state explicitly**.
 ### Extension Task 2: Modify the Function Return Value
 [Back to Table of Contents](#table-of-contents)
 
+<details>
+
+<summary>   Extension Task 2: Modify the Function Return Value  </summary>
+
 **Task Description:-** Instead of returning only a boolean, update your function to return:
 
 `(match_result, characters_consumed, trace)`
@@ -2078,6 +2082,9 @@ Trace:
 ------------------------------------------------------------
 
 ```
+
+</details>
+
 <details>
 <summary>        Line by Line explanation of Extension Task 2     </summary>
 
