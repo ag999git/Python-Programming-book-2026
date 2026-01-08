@@ -860,20 +860,60 @@ XXX
   -   Stops when:
      - A non-'a' character is found, OR
      - The string ends
-
-Examples:
-
-"aaaaab" → index stops at 'b'
-
-"b" → loop never runs (zero 'a')
-
-"aaa" → consumes all characters
-
-This is exactly how a regex engine handles *.
+-  Examples:
+  -  "aaaaab" → index stops at 'b'
+  -  "b" → loop never runs (zero 'a')
+  -  "aaa" → consumes all characters.
+  -  This is exactly how a regex engine handles *.
 
 
    
-5. 
+5. Step 2: Matching 'b'
+-  `if index < length and text[index] == 'b':`
+-  Now we expect: One and only one 'b'
+-  We check:
+   -  Are we still inside the string?
+   -  Is the current character 'b'?
+   -  If yes → consume it.
+   -  `index += 1`
+   -  If this 'b' is missing, the match fails immediately.
+
+6. Step 3: Full Match Validation
+-  `if index == length:`
+-  `return True`
+-  This is very important.
+-  Regex engines can:
+   -  Match partially.
+   -  Or match fully (depending on anchors).
+   -  Here, we are enforcing: `^a*b$`
+   -  This means:
+      -  Start at beginning.
+      -  End exactly at the last character
+- So:
+   -  `"aaab"` → ✅ `index` reaches end. So OK
+   -  `"aaaba"` → ❌ index stops early. Not OK
+   -  "abb" → ❌ extra characters remain. Not OK
+- Final Fallback
+   -  `return False`
+7. If any step fails, the string does NOT match the pattern.
+8. How This Simulates a Regex Engine, is summarized in the table below:-
+
+| Regex Concept   | Your Code Equivalent |
+| --------------- | -------------------- |
+| Cursor          | index                |
+| Input string    | text                 |
+| \* quantifier   | while loop           |
+| Character match | text[index] == 'a'   |
+| Full match      | index == length      |
+
+
+8. This is a deterministic finite automaton (DFA) in disguise.
+9. The test functions details are as follows:-
+    - `get_test_cases()` → defines expected behavior.
+    - `run_tests()` → verifies correctness.
+    - Output table → helps students debug mismatches
+
+10. This teaches test-driven thinking, not just regex.
 
 
 
