@@ -846,38 +846,38 @@ Text       | Expected | Actual   | Result
 -  `index` → where we are currently reading in the string.
 -  `length` → total number of characters.
 -  Regex engines scan from left to right, one character at a time — this index simulates that behavior.
-4. Step 1: Matching `a*`
+3. Step 1: Matching `a*`
    `while index < length and text[index] == 'a':
         index += 1`
 - This is the heart of a*.
-  -  What does a* mean?
-  -  Match 'a'
-  -  Or match another 'a'
-  -  Or match zero 'a'
+  -  What does `a*` mean?
+  -  Match `'a'`
+  -  Or match another `'a'`
+  -  Or match zero `'a'`
 - What this loop does:
-  -   Keeps moving forward as long as the current character is 'a'
-  -   Stops when:
-     - A non-'a' character is found, OR
-     - The string ends
+   - Keeps moving forward as long as the current character is `a'`
+   - Stops when:
+     - A non-`'a'` character is found, OR
+     - The string ends.
 -  Examples:
-  -  "aaaaab" → index stops at 'b'
-  -  "b" → loop never runs (zero 'a')
-  -  "aaa" → consumes all characters.
+  -  `"aaaaab"` → index stops at `'b'`
+  -  `"b"` → loop never runs (zero `'a'`)
+  -  `"aaa"` → consumes all characters.
   -  This is exactly how a regex engine handles *.
 
 
    
-5. Step 2: Matching 'b'
+4. Step 2: Matching `'b'`
 -  `if index < length and text[index] == 'b':`
--  Now we expect: One and only one 'b'
+-  Now we expect: One and only one `'b'`
 -  We check:
    -  Are we still inside the string?
-   -  Is the current character 'b'?
+   -  Is the current character `'b'`?
    -  If yes → consume it.
    -  `index += 1`
-   -  If this 'b' is missing, the match fails immediately.
+   -  If this `'b'` is missing, the match fails immediately.
 
-6. Step 3: Full Match Validation
+5. Step 3: Full Match Validation
 -  `if index == length:`
 -  `return True`
 -  This is very important.
@@ -894,8 +894,8 @@ Text       | Expected | Actual   | Result
    -  "abb" → ❌ extra characters remain. Not OK
 - Final Fallback
    -  `return False`
-7. If any step fails, the string does NOT match the pattern.
-8. How This Simulates a Regex Engine, is summarized in the table below:-
+6. If any step fails, the string does NOT match the pattern.
+7. How This Simulates a Regex Engine, is summarized in the table below:-
 
 | Regex Concept   | Your Code Equivalent |
 | --------------- | -------------------- |
