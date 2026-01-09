@@ -11,6 +11,7 @@
 - [Mini Project: Using regular expression (re) to check for primality](#mini-project-simulating-a-regular-expression-matcher-in-python)
 - [Write a regexp which places certain restrictions on a password that a user may select](#problem--write-a-regexp-which-places-the-following-restrictions-on-a-password-that-a-user-may-select-)
 - [Naming Styles in Programming](#naming-styles-in-python-programming) 
+- [Deterministic Finite Automatons (DFA) and Nondeterministic Finite Automaton (NFA)]()
 - [Mini Project: Simulating a Regular Expression Matcher in Python](#mini-project-simulating-a-regular-expression-matcher-in-python)
     - [The Complete Python script which simulates a regex engine](#the-complete-python-script-which-simulates-a-regex-engine-is-as-follows-)
 - [Extension Assignment: Tracing Character Consumption in a Manual Regex Engine](#extension-assignment-tracing-character-consumption-in-a-manual-regex-engine)
@@ -1125,6 +1126,238 @@ print("pascal to upper-> ", pascal_to_upper("PascalCaseExample"))  # pascal to u
 ```
 
 </details>
+
+### Deterministic Finite Automatons(DFA) and Nondeterministic Finite Automaton (NFA)
+
+<details>
+<summary>  Deterministic Finite Automatons(DFA) and Nondeterministic Finite Automaton (NFA)   </summary>
+The book discusses about DFA and NFA briefly. Here you will find a detailed discussion on the topic.
+
+#### Deterministic Finite Automaton (DFA)
+
+##### Why study this topic
+A Python programmer does **not** need DFA/NFA knowledge to:
+
+-   Write basic regex patterns
+    
+-   Validate emails, passwords, IDs
+    
+-   Parse simple text
+
+##### DFA/NFA Knowledge Becomes Practically Useful in preventing Catastrophic Backtracking
+
+Python’s `re` module uses a **backtracking NFA engine**.
+
+That means some regexes can become **exponentially slow**.
+
+#### Example of a potentially dangerous regex, which can lead to catestrophic backtracking is as follows
+
+
+```python
+import re
+
+pattern = re.compile(r'(a+)+$')
+text = 'a' * 30 + 'X' 
+re.match(pattern, text) # Extremely slow 
+```
+
+##### Why this happens
+
+-   The engine keeps trying different ways to split `a+`
+    
+-   It backtracks repeatedly
+    
+-   Runtime explodes
+    
+Knowing _how NFA backtracking works_ helps you **avoid such patterns**.
+
+However, you can be productive without knowing automata theory.
+
+
+
+
+##### What is a DFA?
+
+A **Deterministic Finite Automaton** is a machine that:
+
+-   Has **one definite next state** for each input character
+    
+-   Never “guesses” or backtracks
+    
+-   Reads the input **exactly once**, from left to right
+    
+
+At any point:
+
+> Given the current state and the next character, there is **only one possible move**.
+
+----------
+
+##### DFA are also called Text-directed Regex Engines
+
+These engines are called _text-directed_ because:
+
+-   They focus on scanning the **text**
+    
+-   The regex is compiled into a finite automaton first
+    
+-   Matching proceeds deterministically
+    
+
+##### Key characteristics of DFA are
+
+-   They are Very fast (linear time, O(n))
+-   They dont have memory of previous matches
+    
+
+##### Features NOT supported by DFA are
+
+-   They cannot do Backreferences (`\1`, `\2`, etc.)
+    
+-   They cannot do Lookarounds (in most cases)
+    
+-   They are Lazy (non-greedy) quantifiers
+    
+
+##### Typical examples
+-   `grep`
+-   `egrep`
+    
+-   POSIX regular expressions
+    
+-   Many lexer/tokenizer engines
+    
+
+----------
+
+#### Why DFA engines cannot support backreferences
+
+Backreferences require the engine to:
+
+-   Remember _what was matched earlier_
+    
+-   Compare future text against that remembered value
+    
+
+On the other hand DFA:
+
+-   Has **finite memory**
+    
+-   Cannot store arbitrary substrings
+    
+-   Cannot “go back and check”
+    
+
+Therefore:
+
+> **Backreferences make a language non-regular**, which DFA cannot handle.
+
+----------
+
+#### 2. Nondeterministic Finite Automaton (NFA)
+
+##### What is an NFA?
+
+An **NFA** is a machine that:
+
+-   Can have **multiple possible next states**
+    
+-   Can “try many paths” simultaneously (conceptually)
+    
+-   May need to backtrack if a path fails
+    
+
+Important:
+
+> The engine _tries possibilities_ and abandons them if they don’t work.
+
+----------
+
+##### NFA-based (Regex-directed) Regex Engines
+
+These engines are called _regex-directed_ because:
+
+-   The regex structure drives execution
+    
+-   The engine explores different matching paths
+    
+
+##### Key characteristics
+
+-   Very expressive in terms of computation and memory usage
+    
+-   Supports advanced features
+    
+-   But, can be slow in worst cases
+    
+-   They are vulnerable to catastrophic backtracking
+    
+
+##### Features supported
+
+-   Backreferences
+    
+-   Lookaheads and lookbehinds
+    
+-   Lazy (non-greedy) quantifiers
+    
+-   Conditional expressions
+    
+
+##### Typical examples
+
+-   Python `re`
+    
+-   Perl
+    
+-   Java
+    
+-   JavaScript
+    
+-   PCRE (PHP, Ruby, etc.)
+    
+
+----------
+
+##### Backreferences and why backreferences require NFA
+-   A **backreference** allows a regex to refer to a previously captured group.
+
+-   The engine must **remember** the captured text
+    
+-   It must **compare** future input with that stored value
+    
+-   This requires memory and backtracking
+    
+
+
+
+----------
+
+##### Greedy vs Lazy Quantifiers and why lazy quantifiers need NFA
+-   Greedy quantifiers match **as much as possible**. Lazy (Non-greedy) quantifiers match **as little as possible**
+- For RegEx Engine to work as Lazy Quantifier:-
+    -   The engine must:
+    
+    -   Try the smallest match
+        
+    -   Expand only if the rest fails
+        
+-   This requires **trial, error, and backtracking** which is  not possible in DFA engines
+
+##### Comparison of NFA to DFA is given in the table below:-
+
+| Task | Better Tool |
+| --- | --- |
+| Massive log scanning | DFA-based tool (grep) |
+| Complex validation | Python re (NFA) |
+| High-performance parsing | Manual parsing / tokenizer |
+| Security-sensitive regex | DFA-style patterns only |
+
+
+    
+</details>
+
+
 
 ### Mini Project: Simulating a Regular Expression Matcher in Python
 [Back to Table of Contents](#table-of-contents)
