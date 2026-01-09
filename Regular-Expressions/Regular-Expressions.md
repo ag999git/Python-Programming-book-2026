@@ -3972,11 +3972,8 @@ This is now a **full-featured teaching tool for a regex engine.**
 
 <summary>   How Does Python’s re Module Expose Pattern and Match Types Without Defining Them? </summary>
 
-
-
-
-
 We may call this exercise as:- The Mystery of the "Missing" Classes
+
 This exercise will help you to understand how the re module of Python:-
 -   Exposes **public APIs** over **private C implementations**
     
@@ -4000,9 +3997,10 @@ Despite not having a `class` definition in Python, the `re` module successfully 
 
 **Your Goal:** Investigate the `re` module's source code to discover how the developers "manufactured" these class names out of thin air.
 
-https://github.com/python/cpython/blob/main/Lib/re/__init__.py 
 
 [Link to source code of __init__()__ file of re module](https://github.com/python/cpython/blob/main/Lib/re/__init__.py)
+
+(Can click this also: https://github.com/python/cpython/blob/main/Lib/re/__init__.py  )
 ----------
 
 #### How to study this
@@ -4050,7 +4048,7 @@ Navigate to the [official CPython GitHub repository](https://github.com/python/c
 
 Find these two specific lines in the source code:
 
-Python
+[Link to specific lines in __init__() file of re module showing code snippet given below](https://github.com/python/cpython/blob/main/Lib/re/__init__.py#L313)
 
 ```python
 Pattern = type(_compiler.compile('', 0))
