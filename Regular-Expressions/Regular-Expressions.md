@@ -20,7 +20,7 @@
     - [Extension Task 2: Modify the Function Return Value](#extension-task-2-modify-the-function-return-value)
     - [Extension Task 3: Display Consumption Details in Output](#extension-task-3-display-consumption-details-in-output)
     - [Extension Task 4: Interpret Partial Consumption](#extension-task-4-interpret-partial-consumption)
--  []()
+-  [How Does Python’s re Module Expose Pattern and Match Types Without Defining Them?](#how-does-pythons-re-module-expose-pattern-and-match-types-without-defining-them)
 
 
 
