@@ -4048,7 +4048,7 @@ Navigate to the [official CPython GitHub repository](https://github.com/python/c
 
 Find these two specific lines in the source code:
 
-[Link to specific lines in __init__() file of re module showing code snippet given below](https://github.com/python/cpython/blob/main/Lib/re/__init__.py#L313)
+[Link to following 2 lines in the source code ](https://github.com/python/cpython/blob/a4086d7f89e5d388e4ffcdb13e4fba0255234286/Lib/re/__init__.py#L310)
 
 ```python
 Pattern = type(_compiler.compile('', 0))
