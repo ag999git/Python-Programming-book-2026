@@ -8,6 +8,7 @@
     - [Beginner level](#beginner-level)
     - [Intermediate Level](#intermediate-level)
     - [Advance level](#advanced-level)
+- []()
 - [Mini Project: Using regular expression (re) to check for primality](#mini-project-simulating-a-regular-expression-matcher-in-python)
 - [Write a regexp which places certain restrictions on a password that a user may select](#problem--write-a-regexp-which-places-the-following-restrictions-on-a-password-that-a-user-may-select-)
 - [Naming Styles in Programming](#naming-styles-in-python-programming) 
@@ -420,6 +421,197 @@ re.compile(r""" \d+     # digits \s*     # optional space """, re.VERBOSE)
 **Learning Points:**
 
 </details>
+
+### Some questions/ scripts based on re module
+<details>
+<summary>  Some questions/ scripts based on re module </summary>
+
+
+#### Question 1. Write a Python script that checks whether a given string **starts with one or more digits**.
+
+Use the re module.
+
+**Hint(s)**
+
+-   Use `re.match()` (not search)
+-   The pattern `\d+` means _one or more digits_
+-   Remember: `re.match()` only checks at the beginning of the string
+
+**Solution**
+```python
+import re
+text = "123abc"
+```
+
+##### `re.match()` checks ONLY at the beginning of the string
+
+`match_obj = re.match(r"\d+", text)`
+
+##### Always check if a Match object exists before using it
+
+```python
+if match_obj:
+    print("The string starts with digits:", match_obj.group())
+else:
+    print("The string does NOT start with digits")
+```
+
+**Learning Objective**
+
+-   Understand how `re.match()` differs from `re.search()`
+-   Learn how to test whether a `Match` object exists
+-   Learn basic digit pattern `\d+`
+
+#### Question 2: Searching for a Pattern Anywhere in a String
+
+**Task:-** Write a script that checks whether the word "cat" appears **anywhere** in a sentence.
+
+**Hint(s)**
+
+-   Use `re.search()` instead of `re.match()`
+-   Matching should be case-insensitive
+
+**Solution**
+
+```python
+import re
+sentence = "The Cat is sleeping on the sofa"
+# re.I makes the search case-insensitive
+match_obj = re.search(r"cat", sentence, re.I)
+if match_obj:
+    print("Found 'cat' at position:", match_obj.start())
+else:
+    print("'cat' not found")
+
+```
+
+**Learning Objective**
+
+-   Learn how `re.search()` scans the entire string
+-   Understand the effect of the `re.I` (ignore case) flag
+-   Learn how to use `start()` to get match position
+
+**Question 3: Finding All Numbers in a String**
+
+**Task:-** Extract **all numbers** from the following string: "Order 123 was shipped on 25th and invoice 789 was generated"
+
+**Hint(s)**
+
+-   Use `re.findall()`
+-   The result will be a list, not Match objects
+-   Pattern for digits: `\d+`
+
+**Solution**
+```python
+import re
+text = "Order 123 was shipped on 25th and invoice 789 was generated"
+# findall() returns a list of all matches
+numbers = re.findall(r"\d+", text)
+print("Numbers found:", numbers)
+```
+
+**Learning Objective**
+
+-   Understand how `re.findall()` differs from `search()` and `match()`
+-   Learn when Match objects are NOT returned
+-   Learn to extract multiple matches at once
+
+**Question 4: Iterating Over Matches with Positions**
+
+**Task:-** Modify the previous problem to print **each number along with its position** in the string.
+
+**Hint(s)**
+
+-   Use `re.finditer()` instead of `findall(`)
+-   Each item returned is a `Match` object
+-   Use `group()` and `start()`
+
+**Solution**
+
+```python
+import re
+text = "Order 123 was shipped on 25th and invoice 789 was generated"
+# finditer() returns an iterator of Match objects
+for match in re.finditer(r"\d+", text):
+    print(
+"Found number:",
+match.group(),
+"at position:",
+match.start()
+)
+```
+
+**Learning Objective**
+
+-   Understand the difference between `findall()` and `finditer()`
+-   Learn how to work with `Match` objects in a loop
+-   Learn to extract both value and location
+
+**Question 5: Replacing Sensitive Data**
+
+**Task:-** Write a script that replaces **all numbers** in a string with "###" and also prints how many replacements were made.
+
+**Hint(s)**
+
+-   Use `re.subn()`
+-   `subn()` returns a tuple: `(new_string, count)`
+-   Pattern for numbers is still `\d+`
+
+**Solution**
+
+```python
+import re
+text = "My phone number is 987654 and my pin is 4321"
+# subn() returns (modified_string, number_of_replacements)
+new_text, count = re.subn(r"\d+", "###", text)
+print("Modified text:", new_text)
+print("Number of replacements:", count)
+```
+
+**Learning Objective**
+
+-   Learn how substitution works in regex
+-   Understand the difference between `sub()` and `subn()`
+-   Learn how to track how many changes were made
+
+**Question 6: Using a Compiled Pattern (Performance & Reuse)**
+
+**Task:-** Compile a regex pattern to find words and use it on **multiple strings**.
+
+**Hint(s)**
+
+-   Use `re.compile()`
+-   Use the `p.findall()` method of the Pattern object
+-   Pattern for words: \w+
+
+**Solution**
+
+```python
+import re
+# Compile once (factory function)
+word_pattern = re.compile(r"\w+")
+texts = [
+"Python is fun",
+"Regex is powerful",
+"Practice makes perfect"
+]
+# Reuse the same Pattern object
+for text in texts:
+    words = word_pattern.findall(text)
+    print("Words in text:", words)
+```
+
+**Learning Objective**
+
+-   Understand what a `Pattern` object is
+-   Learn why compiled patterns are reusable
+-   Understand difference between convenience functions and instance methods
+
+
+    
+</details>
+
+
 
 ### Using regular expression (re) to check for primality
 [Back to Table of Contents](#table-of-contents)
@@ -1863,9 +2055,9 @@ Text       | Expected | Actual   | Result
       -  Start at beginning.
       -  End exactly at the last character
 - So:
-   -  `"aaab"` → ✅ `index` reaches end. So OK
-   -  `"aaaba"` → ❌ index stops early. Not OK
-   -  "abb" → ❌ extra characters remain. Not OK
+   -  `"aaab"` →  `index` reaches end. So OK
+   -  `"aaaba"` →  index stops early. Not OK
+   -  "abb" →  extra characters remain. Not OK
 - Final Fallback
    -  `return False`
 6. If any step fails, the string does NOT match the pattern.
