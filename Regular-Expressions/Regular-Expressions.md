@@ -414,15 +414,99 @@ print(pattern.groups())
   </details>
 
   <details>
-    <summary> 13 XXX </summary>
+    <summary> 13 The following script shows difference in use of capturing and non-capturing groups:- </summary>
 
+```python
+import re
+
+text = "Here are some files: report.pdf, notes.docx, image.png, summary.txt."
+
+# 1. Using non-capturing group for filename to focus on capturing the file extension
+# The regex r"(?:\w+)\.(pdf|docx|txt)" is in 3 parts:
+# A. (?:\w+) → non-capturing group for the filename (we don't need to capture it)
+# B. \. → literal dot before the file extension  
+# C. (pdf|docx|txt) → capturing group for specific file extensions we want to match
+
+m1 = re.search(r"(?:\w+)\.(pdf|docx|txt)", text)  # Selecting only pdf, docx, txt files
+print(m1.group(1))  # docx
+
+# 2. Using capturing group for filename to capture the filename part
+m2 = re.search(r"(\w+)\.(pdf|docx|txt)", text)
+print(m2.group(1))  # notes
+
+# In m1, we use a non-capturing group (?:...) for the filename part since we only need to capture the file extension. 
+# In m2, we use a capturing group (...) for the filename part to capture 'notes'.
+
+# 3. If you want to capture both filename and extension, you can do:
+m3 = re.search(r"(\w+)\.(pdf|docx|txt)", text)
+print(m3.group(1))  # notes 
+print(m3.group(2))  # docx
+
+```
 
       
   </details>
 
   <details>
-    <summary> 14 XXX </summary>
+    <summary> 14 The following script shows use of non-capturing and capturing groups in removing duplicate words in a sentence:- </summary>
 
+
+```python
+# Difference between (\b\w+)(?:\s+\1)+ and (\b\w+)(\s+\1)+ and 
+
+import re
+# 1. Using non-capturing group for the repeated duplicates
+#    Explanation for (\b\w+)(?:\s+\1)+
+#    In this pattern, the first group (\b\w+) captures a word.
+#    The second part (?:\s+\1)+ is a non-capturing group that matches 
+#    one or more occurrences of whitespace followed by the same word 
+#    captured in the first group. Since it is a non-capturing group, 
+#    it does not create a separate capturing group for the repeated matches.    
+
+def remove_duplicates_non_capturing(some_text):
+    # Using non-capturing group for the repeated duplicates
+    without_dup_text = re.sub(r'(\b\w+)(?:\s+\1)+', r'\1', some_text)
+    return without_dup_text 
+
+# Test the function
+text_with_dup = 'The The cat cat cat sat sat on on the the wall wall.'
+text_without_dup = remove_duplicates_non_capturing(text_with_dup)
+print("Using non-capturing->", text_without_dup) # Output: 'The cat sat on the wall.'
+
+# Explanation: Capturing vs Non-Capturing Groups
+# In capturing, the pattern is (\b\w+)(\s+\1)+. The second group (\s+\1) 
+# captures the whitespace and the repeated word. This means that every 
+# time a duplicate is found, it is captured again, which can lead to more 
+# complex backreferences.
+
+# In contrast, using a non-capturing group (?:\s+\1)+ means that we are only interested in matching the duplicates without capturing them again.
+# This simplifies the pattern and makes it more efficient for the purpose of removing duplicates.   
+# Both patterns will effectively remove duplicates, but the non-capturing group is more efficient in this context.  
+# The output will be the same for both patterns:
+# 'The cat sat on the wall.'    
+# However, using the non-capturing group is generally preferred when the repeated matches do not need to be referenced later.   
+
+# 2. Using capturing group for the repeated duplicates
+#    Explanation for (\b\w+)(\s+\1)+
+#    In this pattern, the first group (\b\w+) captures a word. 
+#    The second part (\s+\1)+ is a capturing group that matches one or more 
+#    occurrences of whitespace followed by the same word captured in the first group.
+#    Since it is a capturing group, it creates a separate capturing group for the repeated matches.    
+#    This means that every time a duplicate is found, it is captured again, which can lead to more 
+#    complex backreferences.
+
+def remove_duplicates_capturing(some_text):
+    without_dup_text = re.sub(r'(\b\w+)(\s+\1)+', r'\1', some_text)
+    return without_dup_text 
+
+# Test the function
+text_with_dup = 'The The cat cat cat sat sat on on the the wall wall.'  
+text_without_dup_capturing = remove_duplicates_capturing(text_with_dup)
+print("Using capturing-> ", text_without_dup_capturing)  # Output: 'The cat sat on the wall.'
+# Both functions produce the same output, but the first function uses a non-capturing group for efficiency. 
+
+
+```
 
       
   </details>
