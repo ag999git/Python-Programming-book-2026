@@ -33,8 +33,8 @@
   <summary><strong> Main Section Title (Click to Expand)</strong></summary>
   
   <br> <details>
-    <summary>1. First Sub-Section</summary>
-    
+    <summary> 1. First Sub-Section</summary>
+    Hi Hi 1
     Add your content for section 1 here.
     
     - You can use lists
