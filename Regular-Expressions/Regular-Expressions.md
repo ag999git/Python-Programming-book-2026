@@ -4,7 +4,7 @@
 
 
 ### Table of contents
-- [XXX]()
+- [Scripts from book in the Chapter on Regular Expressions](#scripts-from-book-in-the-chapter-on-regular-expressions)
 - [Python `re` Module – Questions & Answers](#python-re-module--questions--answers)
     - [Beginner level](#beginner-level)
     - [Intermediate Level](#intermediate-level)
