@@ -1,7 +1,7 @@
 
 <img align ="left" src="https://github.com/ag999git/Python-Programming-book-2026/blob/main/book-extra/Cover-Python-programming-by-Anurag-Gupta.jpeg" width="20%" alt="Python Book"/>
-##### "Python Programming: Problem Solving, Packages and Libraries" authored by Anurag Gupta and G.P. Biswas
-##### You can get the book on Amazon [Here](https://amzn.in/d/92pgv9Y)
+ "Python Programming: Problem Solving, Packages and Libraries" authored by Anurag Gupta and G.P. Biswas
+You can get the book on Amazon [Here](https://amzn.in/d/92pgv9Y)
 
 ![Python 3.12+ Badge](https://img.shields.io/badge/Python-3.12%2B-blue)
 ![Static Badge](https://img.shields.io/badge/regular-expressions-green?logo=python&logoColor=blue&labelColor=yellow&color=light%20green)
