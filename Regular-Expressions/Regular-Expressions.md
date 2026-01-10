@@ -2,6 +2,13 @@
 <img src="https://github.com/ag999git/Python-Programming-book-2026/blob/main/book-extra/Cover-Python-programming-by-Anurag-Gupta.jpeg" width="20%" alt="Image description">
 </p>
 
+<img align ="left" src="https://github.com/ag999git/Python-Programming-book-2026/blob/main/book-extra/Cover-Python-programming-by-Anurag-Gupta.jpeg" width="20%" alt="Python Book"/>
+Python book
+
+
+
+
+
 ### "Python Programming: Problem Solving, Packages and Libraries" authored by Anurag Gupta and G.P. Biswas
 ### You can get the book on Amazon [Here](https://amzn.in/d/92pgv9Y)
 
