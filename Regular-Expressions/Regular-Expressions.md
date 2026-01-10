@@ -3,11 +3,11 @@
  
  --------
  
- "Python Programming: Problem Solving, Packages and Libraries" authored by Anurag Gupta and G.P. Biswas <br>
+ "Python Programming: Problem Solving, Packages and Libraries" authored by Anurag Gupta and G.P. Biswas <br/>
 
 ---------
 
-
+<br/>
 
 
 
