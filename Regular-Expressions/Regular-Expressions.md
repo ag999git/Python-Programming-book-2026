@@ -28,17 +28,26 @@
 
 
 
-### XXX
+### Scripts from book in the Chapter on Regular Expressions 
 <details>
-  <summary><strong> Main Section Title (Click to Expand)</strong></summary>
+  <summary><strong> Scripts from book on Regular Expressions (Click to Expand)</strong></summary>
   
   <br> <details>
-    <summary> 1. First Sub-Section</summary>
-    Hi Hi 1
-    Add your content for section 1 here.
-    
-    - You can use lists
-    - Because of the empty lines above
+    <summary> 1. script uses the findall() function of the re module to show the difference between \d and \d+</summary>
+
+```python
+# Using findall() with digit patterns
+import re
+text = "My numbers are 1, 234, and 56z7."
+print(re.findall(r"\d", text))  # ['1','2','3','4','5','6','7']
+print(re.findall(r"\d+", text)) # ['1', '234', '56', '7']
+print(re.findall(r"\d{2}", text)) # ['23', '56']
+print(re.findall(r"\d\d\d", text)) # ['234']
+
+
+
+```
+
   </details>
 
   <details>
