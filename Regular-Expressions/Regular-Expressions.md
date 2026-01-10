@@ -236,7 +236,7 @@ print(f"Subn {r'\\d+'} With '#' In {text}-> ", result)
   </details>
 
   <details>
-    <summary>6. Script on working of methods of the Match object</summary>
+    <summary> 6. Script on working of methods of the Match object</summary>
     
 ```python
 
@@ -301,12 +301,165 @@ if p.flags & re.S:  # Check if DOTALL flag is set
 else:
     print("DotAll is OFF")
 
+```     
+  </details>
+  <details>
+    <summary> 8. The following script shows the difference between greedy and non-greedy regex:-     </summary> 
+
+```python
+import re
+text = "abc123xyz456"
+# 1. Greedy matching 
+m1 = re.search(".*\\d+", text) # greedy
+print(m1.group())  # Oupput: abc123xyz456
+
+# 2. Non-greedy (lazy) matching
+m2 = re.search(".*?\\d+", text) # non-greedy
+print(m2.group())  # Output: abc123
+
 ```
+      
+  </details>
+  <details>
+    <summary> 9 Another script showing difference in use of Greedy and non-Greedy(Lazy) RegEx    </summary>
+
+```python
+import re
+str_html = '<!DOCTYPE html> <html> <head> </head> </html>'
+print('length string->', len(str_html))  # length of the string-> 45
+
+# 1.GREEDY.Does not have ? after *. This makes it greedy (default)
+pat_greedy = '<.*>' # 
+print('length greedy->', re.match(pat_greedy, str_html).span())
+# Output: length greedy-> (0, 45)
+print('groups greedy->', re.match(pat_greedy, str_html).group())
+# Output: <!DOCTYPE html> <html> <head> </head> </html>
+
+# 2. NON-GREEDY. It has ? after * which makes it non-greedy (lazy)
+pat_nongreedy = '<.*?>' #
+print('length non-greedy->', re.match(pat_nongreedy, str_html).span())
+# Output: length non-greedy-> (0, 15)
+print('groups non-greedy->', re.match(pat_nongreedy, str_html).group())
+# Output: <!DOCTYPE html>
+
+```
+
+  </details>
+
+  <details>
+    <summary> 10. Grouping for Repetition (Quantifiers). This is the most common use  </summary>  
+
+```python
+import re
+text = "ababab"
+# The regex pattern (?:ab)+ matches one or more occurrences 
+# of the sequence 'ab' without capturing it as a group.   
+pattern = re.findall(r"(?:ab)+", text)
+print(pattern)
+# Output: ['ababab']
+
+```
+
+
+  </details>
+  
+<details>
+    <summary> 11. Grouping for Alternation (OR)  </summary>  
+
+```python
+import re
+# Using non-capturing groups with (?:...) allows us to match patterns without 
+# creating separate capture groups, resulting in a simpler output from re.findall.  
+
+# 1. Non-capturing group (?:cat|dog|rat) matches 'cat', 'dog', or 'rat'
+# It allows us to group alternatives together without creating separate 
+# capture groups. re.findall returns list of matched strings directly. 
+# For example:
+pattern1 = re.findall(r"(?:cat|dog|rat)", "cat dog rat bat")
+print("Non-capturing-> ", pattern1)
+# Output: Non-capturing->  ['cat', 'dog', 'rat']
+
+# 2. If we use capturing groups (i.e., (cat|dog|rat)), re.findall 
+# would return list of tuples with each matched string in its own 
+# tuple because each match is captured in its own group.
+# For example:  
+pattern2 = re.findall(r"(cat|dog|rat)", "cat dog rat bat")
+print("Capturing-> ", pattern2)    
+# Output
+# [('cat',), ('dog',), ('rat',)]    
+
+``` 
+  </details>
+
+
+<details>
+    <summary> 12. Example: Comparing Non-capturing to unwanted Capturing  </summary>  
+
+```python
+import re
+# 1. Original Version Using Capturing Group
+pattern = re.search(r"(Mr|Ms|Dr)\. (\w+)", "Dr. John")
+print(pattern.groups())
+# Output: ('Dr', 'John')
+
+# 2. But if title not needed , capturing is unnecessary.
+# Improved Version Using Non-Capturing Group  
+pattern = re.search(r"(?:Mr|Ms|Dr)\. (\w+)", "Dr. John")
+print(pattern.groups()) 
+# Output: ('John',) 
+
+```
+
+    
+  </details>
+
+  <details>
+    <summary> 13 XXX </summary>
 
 
       
   </details>
 
+  <details>
+    <summary> 14 XXX </summary>
+
+
+      
+  </details>
+
+
+  <details>
+    <summary> 15 XXX </summary>
+
+
+      
+  </details>
+  
+
+  <details>
+    <summary>16  XXX </summary>
+
+
+      
+  </details>
+
+
+  <details>
+    <summary> 17 XXX </summary>
+
+
+      
+  </details>
+
+
+  <details>
+    <summary> 18 XXX </summary>
+
+
+      
+  </details>
+
+  
 </details>
  
 
