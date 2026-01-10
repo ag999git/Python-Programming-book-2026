@@ -1284,7 +1284,7 @@ Given below is an improved version of the script with helpful comments (In colla
 
 <details>
 
-<summary> Assignment: Detecting Prime Numbers Using Regular Expressions Detailed script </summary>
+<summary> Assignment: Detecting Prime Numbers Using Regular Expressions Detailed script (Click to Expand) </summary>
 
 
 ```python
