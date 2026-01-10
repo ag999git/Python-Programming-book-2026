@@ -52,7 +52,7 @@
   <summary><strong> Scripts from book on Regular Expressions (Click to Expand)</strong></summary>
   
   <br> <details>
-    <summary> 1. script uses the findall() function of the re module to show the difference between \d and \d+</summary>
+    <summary> 1. script uses the findall() function of the re module to show the difference between \d and \d+ (Click to Expand) </summary>
 
 ```python
 # Using findall() with digit patterns
