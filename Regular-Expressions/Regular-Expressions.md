@@ -55,7 +55,7 @@ print(re.findall(r"\d\d\d", text)) # ['234']
   </details>
 
   <details>
-    <summary>2. The following script shows how re.compile() creates and returns a Pattern object called p. The type() of p is Pattern as shown by the print() function.</summary>
+    <summary>2. The following script shows how re.compile() creates and returns a Pattern object called p. The type() of p is Pattern as shown by the print() function. (Click to Expand) </summary>
     
 ```python
 import re
@@ -74,7 +74,7 @@ print(type(p))  # Output: <class 're.Pattern'>
   </details>
 
   <details>
-    <summary>3. Example script on groups </summary>
+    <summary>3. Example script on groups (Click to Expand) </summary>
     
 ```python
 import re
@@ -99,7 +99,7 @@ print("Second digits:", m2.group(3))  # Output: 456
   </details>
 
   <details>
-    <summary>4. Script using convenience functions</summary>
+    <summary>4. Script using convenience functions (Click to Expand) </summary>
     
 ```python
 import re
@@ -168,7 +168,7 @@ print(f"Subn {r'\d+'} With '#' In {text}-> ", result)
   </details>
 
   <details>
-    <summary>5. Script using Instance methods of the Pattern class objects </summary>
+    <summary>5. Script using Instance methods of the Pattern class objects (Click to Expand) </summary>
     
 ```python
 import re
@@ -233,8 +233,6 @@ result = pattern_digits.subn("#", text)  # Replace digit sequences with '#' and 
 print(f"Subn {r'\\d+'} With '#' In {text}-> ", result)
 # OUTPUT: Subn \d+ With '#' In abc 123 def 456-> ('abc # def #', 2)
 
-
-
 ```
 
 
@@ -242,7 +240,7 @@ print(f"Subn {r'\\d+'} With '#' In {text}-> ", result)
   </details>
 
   <details>
-    <summary> 6. Script on working of methods of the Match object</summary>
+    <summary> 6. Script on working of methods of the Match object. (Click to Expand) </summary>
     
 ```python
 
@@ -289,7 +287,7 @@ print(match.group(1, 2, 0))  # ("abc", "123", "abc123") matches groups 1, 2, and
   </details>
 
   <details>
-    <summary> 7. Script showing use of flags in compile()    </summary>
+    <summary> 7. Script showing use of flags in compile() (Click to Expand)   </summary>
 
 ```python
 import re
@@ -310,7 +308,7 @@ else:
 ```     
   </details>
   <details>
-    <summary> 8. The following script shows the difference between greedy and non-greedy regex:-     </summary> 
+    <summary> 8. The following script shows the difference between greedy and non-greedy regex:-  (Click to Expand)   </summary> 
 
 ```python
 import re
@@ -327,7 +325,7 @@ print(m2.group())  # Output: abc123
       
   </details>
   <details>
-    <summary> 9 Another script showing difference in use of Greedy and non-Greedy(Lazy) RegEx    </summary>
+    <summary> 9 Another script showing difference in use of Greedy and non-Greedy(Lazy) RegEx  (Click to Expand)  </summary>
 
 ```python
 import re
@@ -353,7 +351,7 @@ print('groups non-greedy->', re.match(pat_nongreedy, str_html).group())
   </details>
 
   <details>
-    <summary> 10. Grouping for Repetition (Quantifiers). This is the most common use  </summary>  
+    <summary> 10. Grouping for Repetition (Quantifiers). This is the most common use (Click to Expand) </summary>  
 
 ```python
 import re
@@ -370,7 +368,7 @@ print(pattern)
   </details>
   
 <details>
-    <summary> 11. Grouping for Alternation (OR)  </summary>  
+    <summary> 11. Grouping for Alternation (OR) (Click to Expand) </summary>  
 
 ```python
 import re
@@ -399,7 +397,7 @@ print("Capturing-> ", pattern2)
 
 
 <details>
-    <summary> 12. Example: Comparing Non-capturing to unwanted Capturing  </summary>  
+    <summary> 12. Example: Comparing Non-capturing to unwanted Capturing (Click to Expand) </summary>  
 
 ```python
 import re
@@ -420,7 +418,7 @@ print(pattern.groups())
   </details>
 
   <details>
-    <summary> 13 The following script shows difference in use of capturing and non-capturing groups:- </summary>
+    <summary> 13 The following script shows difference in use of capturing and non-capturing groups:- (Click to Expand) </summary>
 
 ```python
 import re
@@ -454,7 +452,7 @@ print(m3.group(2))  # docx
   </details>
 
   <details>
-    <summary> 14 The following script shows use of non-capturing and capturing groups in removing duplicate words in a sentence:- </summary>
+    <summary> 14 The following script shows use of non-capturing and capturing groups in removing duplicate words in a sentence:- (Click to Expand) </summary>
 
 
 ```python
@@ -519,7 +517,7 @@ print("Using capturing-> ", text_without_dup_capturing)  # Output: 'The cat sat 
 
 
   <details>
-    <summary> 15 Example Python Script which removes duplicate words using non-capturing groups. </summary>
+    <summary> 15 Example Python Script which removes duplicate words using non-capturing groups. (Click to Expand) </summary>
 
 
 ```python
@@ -549,7 +547,7 @@ for m in matches:
   
 
   <details>
-    <summary>16 Backreferences (Example 2: Swapping Words) </summary>
+    <summary>16 Backreferences (Example 2: Swapping Words) (Click to Expand) </summary>
 
 ```python
 """
@@ -579,7 +577,7 @@ print(new_text)
 
 
   <details>
-    <summary> 17 Using lookaround to ask user to select a valid password </summary>
+    <summary> 17 Using lookaround to ask user to select a valid password (Click to Expand) </summary>
 
 ```python
 
@@ -615,7 +613,7 @@ for pwd in passwords:  # Check each password
 
 
   <details>
-    <summary> 18 The script which implements above password check without using lookaround is as follows:- </summary>
+    <summary> 18 The script which implements above password check without using lookaround is as follows:- (Click to Expand) </summary>
 
 ```python
 import re
