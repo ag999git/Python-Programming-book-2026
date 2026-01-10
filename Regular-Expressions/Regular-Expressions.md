@@ -162,7 +162,7 @@ print(f"Subn {r'\d+'} With '#' In {text}-> ", result)
   </details>
 
   <details>
-    <summary>5. 11.15.	Script using Instance methods of the Pattern class objects </summary>
+    <summary>5. Script using Instance methods of the Pattern class objects </summary>
     
 ```python
 import re
@@ -513,32 +513,145 @@ print("Using capturing-> ", text_without_dup_capturing)  # Output: 'The cat sat 
 
 
   <details>
-    <summary> 15 XXX </summary>
+    <summary> 15 Example Python Script which removes duplicate words using non-capturing groups. </summary>
 
+
+```python
+import re
+
+text = "The The cat cat cat sat sat on on the the wall wall"
+
+pattern = re.compile(r"(\b\w+)(?:\s+\1)+") # Pattern to find duplicate words
+
+matches = pattern.finditer(text)
+
+for m in matches:
+    print("Duplicate word:", m.group(1))
+
+# Output:   
+# Duplicate word: The
+# Duplicate word: cat   
+# Duplicate word: sat
+# Duplicate word: on    
+# Duplicate word: the
+# Duplicate word: wall
+
+```
 
       
   </details>
   
 
   <details>
-    <summary>16  XXX </summary>
+    <summary>16 Backreferences (Example 2: Swapping Words) </summary>
 
+```python
+"""
+Backreferences can also be used to rearrange text.
+Consider the regex:
+([^\s]+)\s+([^\s]+)  
+This pattern has three parts:
+•   ([^\s]+) → first word
+•   \s+ → whitespace
+•   ([^\s]+) → second word
+The two words are captured as:
+•   \1 → first word
+•   \2 → second word
+We can use backreferences in the replacement string to rearrange the words.
+"""
+import re
+reg_pat = r'([^\s]+)\s+([^\s]+)'  # Pattern to match two words separated by whitespace  
+old_text = 'ant bee cat dog'
+new_text = re.sub(reg_pat, r'\2 \1', old_text)  # Swap the two words using backreferences   
+print(new_text)
+# Output    
+# bee ant dog cat
+```
 
       
   </details>
 
 
   <details>
-    <summary> 17 XXX </summary>
+    <summary> 17 Using lookaround to ask user to select a valid password </summary>
 
+```python
+
+
+# ^ asserts position at start of the string
+# .* means any character (.) zero or more times (*)
+# Password rules using lookahead assertions:
+# (?=.*[A-Z]) -> Any character 0 or more times. Then 1 uppercase letter
+# (?=.*[a-z]) -> Any character 0 or more times. Then 1 lowercase letter
+# .{8,}       -> at least 8 characters total
+
+password_pattern = re.compile(r"^(?=.*[A-Z])(?=.*[a-z]).{8,}$")
+
+# Test passwords
+passwords = [
+    "no_uppercase",     # no uppercase
+    "NO_LOWERCASE",     # no lowercase
+    "Short",            # too short
+    "Password",         # valid
+    "GoodPass1"         # valid
+]
+
+# Test each password
+for pwd in passwords:  # Check each password
+    if password_pattern.search(pwd):  # Valid password
+        print(pwd, "-> VALID")
+    else:  # Invalid password
+        print(pwd, "-> INVALID")
+```
 
       
   </details>
 
 
   <details>
-    <summary> 18 XXX </summary>
+    <summary> 18 The script which implements above password check without using lookaround is as follows:- </summary>
 
+```python
+import re
+
+# REGEX WITHOUT LOOKAROUNDS
+# Explanation:
+# 1. Minimum length 8 → .{8,}
+# 2. Must contain:
+#    a) uppercase before lowercase OR
+#    b) lowercase before uppercase
+# This forces us to write BOTH cases using alternation (|)
+# Upper case before lowercase: ^[A-Z].*[a-z].{6,}$
+# Lower case before uppercase: ^[a-z].*[A-Z].{6,}$
+
+condition1 = "^[A-Z].*[a-z].{6,}$"
+condition2 = "^[a-z].*[A-Z].{6,}$"
+pattern_no_lookaround = re.compile(rf"({condition1})|({condition2})")
+
+# Passwords to test
+passwords = [
+    "no_uppercase",     # no uppercase
+    "NO_LOWERCASE",     # no lowercase
+    "Short",            # too short
+    "Password",         # valid
+    "GoodPass1"         # valid
+]
+
+# Test each password
+for pwd in passwords:
+    if pattern_no_lookaround.search(pwd):
+        print(pwd, "-> VALID")
+    else:
+        print(pwd, "-> INVALID")
+
+# Output:
+# no_uppercase  -> INVALID  
+# NO_LOWERCASE  -> INVALID  
+# Short         -> INVALID
+# Password      -> VALID
+# GoodPass1     -> VALID      
+
+```
 
       
   </details>
