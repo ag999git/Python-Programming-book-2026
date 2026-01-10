@@ -10,6 +10,7 @@
 
 
 <br/>
+
 ![Python 3.12+ Badge](https://img.shields.io/badge/Python-3.12%2B-blue)
 ![Static Badge](https://img.shields.io/badge/regular-expressions-green?logo=python&logoColor=blue&labelColor=yellow&color=light%20green)
 
